@@ -16,7 +16,193 @@
     <title>Around The U.S.</title>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
   </head>
-  <body>
+  <body class="body">
+    <div class="page">
+      <div class="wrapper">
+        <header class="header">
+          <img
+            src="./images/header__logo.svg"
+            alt="Logotipo em branco da Around The U.S."
+            class="header__logo"
+          />
+        </header>
+        <main class="content">
+          <section class="profile">
+            <img
+              src="./images/profile__picture.jpg"
+              alt="Foto de Perfil do Usuário"
+              class="profile__picture"
+            />
+            <div class="profile__user-info">
+              <div class="profile__user-container">
+                <h1 class="profile__user-name">Jacques Cousteau</h1>
+                <button class="profile__edit-button">
+                  <img
+                    src="./images/edit__icon.svg"
+                    alt="Ícone de Editar Perfil"
+                    class="profile__edit-button-icon"
+                  />
+                </button>
+              </div>
+
+              <p class="profile__user-about">Explorador</p>
+            </div>
+            <button class="profile__add-button">
+              <img
+                class="profile__add-button-icon"
+                src="./images/add__icon.svg"
+                alt="Ícone de Adicionar Foto"
+              />
+            </button>
+            <div class="profile__edit-popup profile__edit-popup_hidden">
+              <div class="profile__edit-popup-card">
+                <h2 class="profile__edit-popup-title">Editar perfil</h2>
+                <form class="profile__edit-popup-form">
+                  <input
+                    id="profile__edit-popup-input-name"
+                    class="profile__edit-popup-input"
+                    type="text"
+                    placeholder="Nome"
+                  />
+                  <input
+                    id="profile__edit-popup-input-about"
+                    class="profile__edit-popup-input profile__edit-popup-input_margin-large"
+                    type="text"
+                    placeholder="Sobre mim"
+                  />
+                  <button class="profile__edit-popup-save-button" type="submit">
+                    Salvar
+                  </button>
+                </form>
+                <button class="profile__edit-popup-close-button">
+                  <img
+                    class="profile__edit-popup-close-button-icon"
+                    src="./images/close__icon.svg"
+                    alt="Ícone de Fechar"
+                  />
+                </button>
+              </div>
+            </div>
+          </section>
+          <section class="grid">
+            <div class="grid__without-cards">
+              <p class="grid__without-cards-text">Ainda não há cartões</p>
+            </div>
+            <div
+              class="grid__card grid__card_align-right grid__card_align-center"
+            >
+              <img
+                src="./images/grid__image-1.jpg"
+                alt="Imagem do Parque Nacional de Yosemite, Califórnia, com suas majestosas montanhas e paisagens naturais deslumbrantes."
+                class="grid__img"
+              />
+              <div class="grid__card-footer">
+                <h2 class="grid__card-title">Vale de Yosemite</h2>
+                <button class="grid__card-button">
+                  <img
+                    src="./images/like__icon.svg"
+                    alt="Ícone de Curtir"
+                    class="grid__like-icon"
+                  />
+                </button>
+              </div>
+            </div>
+            <div class="grid__card">
+              <img
+                src="./images/grid__image-2.jpg"
+                alt="Imagem do Lago sereno com montanhas majestosas ao fundo, refletindo a beleza natural da paisagem."
+                class="grid__img"
+              />
+              <div class="grid__card-footer">
+                <h2 class="grid__card-title">Lago Louise</h2>
+                <button class="grid__card-button">
+                  <img
+                    src="./images/like__icon.svg"
+                    alt="Ícone de Curtir"
+                    class="grid__like-icon"
+                  />
+                </button>
+              </div>
+            </div>
+            <div
+              class="grid__card grid__card_align-right grid__card_align-center"
+            >
+              <img
+                src="./images/grid__image-3.jpg"
+                alt="Imagem de um pôr do sol sobre montanhas."
+                class="grid__img"
+              />
+              <div class="grid__card-footer">
+                <h2 class="grid__card-title">Montanhas Care...</h2>
+                <button class="grid__card-button">
+                  <img
+                    src="./images/like__icon.svg"
+                    alt="Ícone de Curtir"
+                    class="grid__like-icon"
+                  />
+                </button>
+              </div>
+            </div>
+            <div class="grid__card">
+              <img
+                src="./images/grid__image-4.jpg"
+                alt="Imagem de uma cadeia de montanhas sob um céu estrelado, destacando a beleza da natureza à noite."
+                class="grid__img"
+              />
+              <div class="grid__card-footer">
+                <h2 class="grid__card-title">Latemar</h2>
+                <button class="grid__card-button">
+                  <img
+                    src="./images/like__icon.svg"
+                    alt="Ícone de Curtir"
+                    class="grid__like-icon"
+                  />
+                </button>
+              </div>
+            </div>
+            <div
+              class="grid__card grid__card_align-right grid__card_align-center"
+            >
+              <img
+                src="./images/grid__image-5.jpg"
+                alt="Imagem de um lago de montanha refletindo as montanhas ao fundo, criando uma cena serena e natural."
+                class="grid__img"
+              />
+              <div class="grid__card-footer">
+                <h2 class="grid__card-title">Parque Nacional...</h2>
+                <button class="grid__card-button">
+                  <img
+                    src="./images/like__icon.svg"
+                    alt="Ícone de Curtir"
+                    class="grid__like-icon grid__like-icon_active"
+                  />
+                </button>
+              </div>
+            </div>
+            <div class="grid__card">
+              <img
+                src="./images/grid__image-6.jpg"
+                alt="Imagem de barcos atracados em um cais, com montanhas majestosas ao fundo, criando uma paisagem serena e natural."
+                class="grid__img"
+              />
+              <div class="grid__card-footer">
+                <h2 class="grid__card-title">Lago di Braies</h2>
+                <button class="grid__card-button">
+                  <img
+                    src="./images/like__icon.svg"
+                    alt="Ícone de Curtir"
+                    class="grid__like-icon"
+                  />
+                </button>
+              </div>
+            </div>
+          </section>
+        </main>
+        <footer class="footer">
+          <p class="footer__copyright">© 2024 Around The U.S.</p>
+        </footer>
+      </div>
+    </div>
     <script src="./scripts/script.js"></script>
   </body>
 </html>
