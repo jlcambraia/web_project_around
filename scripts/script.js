@@ -56,6 +56,8 @@ function handleProfileFormSubmit(evt) {
 
   displayName.textContent = newName;
   displayJob.textContent = newJob;
+
+  closePopup();
 }
 
 formElement.addEventListener("submit", handleProfileFormSubmit);
