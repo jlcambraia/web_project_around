@@ -1,8 +1,11 @@
+// Função para abrir e fechar o popup de edição do perfil
+
 let openEditButton = document.querySelector(".profile__edit-button");
-let profilePopup = document.querySelector(".profile__edit-popup");
 let closeEditButton = document.querySelector(
   ".profile__edit-popup-close-button"
 );
+let profilePopup = document.querySelector(".profile__edit-popup");
+
 let userName = document.querySelector(".profile__user-name");
 let userAbout = document.querySelector(".profile__user-about");
 
@@ -20,8 +23,9 @@ function closePopup() {
 }
 
 openEditButton.addEventListener("click", openPopup);
-
 closeEditButton.addEventListener("click", closePopup);
+
+// Função para alternar o ícone de "Curtir" ao clicar no botão de curtir
 
 let likeButtons = document.querySelectorAll(".grid__like-icon");
 
@@ -39,6 +43,8 @@ function toggleLike(click) {
 likeButtons.forEach((button) => {
   button.addEventListener("click", toggleLike);
 });
+
+// Função para atualizar o Nome e a Ocupação do usuário após salvar a edição
 
 let formElement = document.querySelector(".profile__edit-popup-form");
 
@@ -61,6 +67,8 @@ function handleProfileFormSubmit(evt) {
 }
 
 formElement.addEventListener("submit", handleProfileFormSubmit);
+
+// Função para mostrar a mensagem "Ainda não há cartões" quando o grid de cartões está vazio
 
 function cardVisibility() {
   let cards = document.querySelectorAll(".grid__card");
