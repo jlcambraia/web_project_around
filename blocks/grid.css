@@ -76,18 +76,9 @@
 
   .grid__card {
     justify-self: center;
-    width: 100%;
   }
 
   .grid__card_align-center {
     justify-self: center;
-  }
-
-  .grid__img {
-    width: 100%;
-  }
-
-  .grid__card-footer {
-    width: 100%;
   }
 }
