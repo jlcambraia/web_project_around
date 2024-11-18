@@ -1,3 +1,9 @@
+// Verificar se há cartões sempre que carregar a página
+
+document.addEventListener("DOMContentLoaded", function () {
+  cardVisibility();
+});
+
 // Função para abrir e fechar o popup de edição do perfil
 
 let openEditButton = document.querySelector(".profile__edit-button");
