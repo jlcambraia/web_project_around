@@ -4,13 +4,17 @@ document.addEventListener("DOMContentLoaded", function () {
   cardVisibility();
 });
 
-// Função para abrir e fechar o popup de edição do perfil
+// Abrir e fechar popup de Edição e Adição no Profile
 
 let openEditButton = document.querySelector(".profile__edit-button");
 let closeEditButton = document.querySelector(
   ".profile__edit-popup-close-button"
 );
-let profilePopup = document.querySelector(".profile__edit-popup");
+let profileEditPopup = document.querySelector(".profile__edit-popup");
+
+let openAddButton = document.querySelector(".profile__add-button");
+let closeAddButton = document.querySelector(".profile__add-popup-close-button");
+let profileAddPopup = document.querySelector(".profile__add-popup");
 
 let userName = document.querySelector(".profile__user-name");
 let userAbout = document.querySelector(".profile__user-about");
@@ -18,18 +22,30 @@ let userAbout = document.querySelector(".profile__user-about");
 let inputName = document.querySelector("#profile__edit-popup-input-name");
 let inputAbout = document.querySelector("#profile__edit-popup-input-about");
 
-function openPopup() {
-  profilePopup.classList.remove("profile__edit-popup_hidden");
-  inputName.value = userName.textContent;
-  inputAbout.value = userAbout.textContent;
+function openPopup(popup) {
+  popup.classList.remove(
+    "profile__edit-popup_hidden",
+    "profile__add-popup_hidden"
+  );
+
+  if (popup === profileEditPopup) {
+    inputName.value = userName.textContent;
+    inputAbout.value = userAbout.textContent;
+  }
 }
 
-function closePopup() {
-  profilePopup.classList.add("profile__edit-popup_hidden");
+function closePopup(popup) {
+  popup.classList.add(
+    "profile__edit-popup_hidden",
+    "profile__add-popup_hidden"
+  );
 }
 
-openEditButton.addEventListener("click", openPopup);
-closeEditButton.addEventListener("click", closePopup);
+openEditButton.addEventListener("click", () => openPopup(profileEditPopup));
+closeEditButton.addEventListener("click", () => closePopup(profileEditPopup));
+
+openAddButton.addEventListener("click", () => openPopup(profileAddPopup));
+closeAddButton.addEventListener("click", () => closePopup(profileAddPopup));
 
 // Função para atualizar o Nome e a Ocupação do usuário após salvar a edição
 
@@ -50,7 +66,7 @@ function handleProfileFormSubmit(evt) {
   displayName.textContent = newName;
   displayJob.textContent = newJob;
 
-  closePopup();
+  closePopup(profileEditPopup);
 }
 
 formElement.addEventListener("submit", handleProfileFormSubmit);
