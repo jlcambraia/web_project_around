@@ -1,4 +1,4 @@
-.grid {
+.grid__card-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px 17px;
@@ -12,6 +12,7 @@
 .grid__card {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .grid__img {
@@ -47,38 +48,42 @@
   overflow: hidden;
 }
 
-.grid__card-button {
+.grid__card-delete-button {
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  cursor: pointer;
+  position: absolute;
+  top: 18px;
+  right: 15px;
+}
+
+.grid__card-delete-button:hover {
+  filter: opacity(0.6);
+}
+
+.grid__card-footer-button {
   border: none;
   padding: 0;
   background-color: transparent;
   cursor: pointer;
 }
 
-.grid__like-icon:not(.no-hover):hover {
+.grid__like-icon:hover {
   filter: opacity(0.5);
 }
 
 @media screen and (max-width: 1024px) {
-  .grid {
+  .grid__card-container {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  .grid__card_align-right {
-    justify-self: end;
+    justify-self: center;
   }
 }
 
 @media screen and (max-width: 544px) {
-  .grid {
+  .grid__card-container {
     grid-template-columns: repeat(1, 1fr);
     padding-bottom: 50px;
-  }
-
-  .grid__card {
-    justify-self: center;
-  }
-
-  .grid__card_align-center {
     justify-self: center;
   }
 }

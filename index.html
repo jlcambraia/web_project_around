@@ -85,117 +85,33 @@
             </div>
           </section>
           <section class="grid">
+            <div class="grid__card-container"></div>
             <div class="grid__without-cards">
               <p class="grid__without-cards-text">Ainda não há cartões</p>
             </div>
-            <div
-              class="grid__card grid__card_align-right grid__card_align-center"
-            >
-              <img
-                src="./images/grid__image-1.jpg"
-                alt="Imagem do Parque Nacional de Yosemite, Califórnia, com suas majestosas montanhas e paisagens naturais deslumbrantes."
-                class="grid__img"
-              />
-              <div class="grid__card-footer">
-                <h2 class="grid__card-title">Vale de Yosemite</h2>
-                <button class="grid__card-button">
+            <template id="grid__card">
+              <div class="grid__card">
+                <img class="grid__img" />
+                <button class="grid__card-delete-button">
                   <img
-                    src="./images/like__icon.svg"
-                    alt="Ícone de Curtir"
-                    class="grid__like-icon"
+                    src="./images/delete__icon.svg"
+                    alt="Ícone de Deletar"
+                    class="grid__delete-icon"
                   />
                 </button>
+
+                <div class="grid__card-footer">
+                  <h2 class="grid__card-title"></h2>
+                  <button class="grid__card-footer-button">
+                    <img
+                      src="./images/like__icon.svg"
+                      alt="Ícone de Curtir"
+                      class="grid__like-icon"
+                    />
+                  </button>
+                </div>
               </div>
-            </div>
-            <div class="grid__card">
-              <img
-                src="./images/grid__image-2.jpg"
-                alt="Imagem do Lago sereno com montanhas majestosas ao fundo, refletindo a beleza natural da paisagem."
-                class="grid__img"
-              />
-              <div class="grid__card-footer">
-                <h2 class="grid__card-title">Lago Louise</h2>
-                <button class="grid__card-button">
-                  <img
-                    src="./images/like__icon.svg"
-                    alt="Ícone de Curtir"
-                    class="grid__like-icon"
-                  />
-                </button>
-              </div>
-            </div>
-            <div
-              class="grid__card grid__card_align-right grid__card_align-center"
-            >
-              <img
-                src="./images/grid__image-3.jpg"
-                alt="Imagem de um pôr do sol sobre montanhas."
-                class="grid__img"
-              />
-              <div class="grid__card-footer">
-                <h2 class="grid__card-title">Montanhas Care...</h2>
-                <button class="grid__card-button">
-                  <img
-                    src="./images/like__icon.svg"
-                    alt="Ícone de Curtir"
-                    class="grid__like-icon"
-                  />
-                </button>
-              </div>
-            </div>
-            <div class="grid__card">
-              <img
-                src="./images/grid__image-4.jpg"
-                alt="Imagem de uma cadeia de montanhas sob um céu estrelado, destacando a beleza da natureza à noite."
-                class="grid__img"
-              />
-              <div class="grid__card-footer">
-                <h2 class="grid__card-title">Latemar</h2>
-                <button class="grid__card-button">
-                  <img
-                    src="./images/like__icon.svg"
-                    alt="Ícone de Curtir"
-                    class="grid__like-icon"
-                  />
-                </button>
-              </div>
-            </div>
-            <div
-              class="grid__card grid__card_align-right grid__card_align-center"
-            >
-              <img
-                src="./images/grid__image-5.jpg"
-                alt="Imagem de um lago de montanha refletindo as montanhas ao fundo, criando uma cena serena e natural."
-                class="grid__img"
-              />
-              <div class="grid__card-footer">
-                <h2 class="grid__card-title">Parque Nacional...</h2>
-                <button class="grid__card-button">
-                  <img
-                    src="./images/like__icon.svg"
-                    alt="Ícone de Curtir"
-                    class="grid__like-icon grid__like-icon_active"
-                  />
-                </button>
-              </div>
-            </div>
-            <div class="grid__card">
-              <img
-                src="./images/grid__image-6.jpg"
-                alt="Imagem de barcos atracados em um cais, com montanhas majestosas ao fundo, criando uma paisagem serena e natural."
-                class="grid__img"
-              />
-              <div class="grid__card-footer">
-                <h2 class="grid__card-title">Lago di Braies</h2>
-                <button class="grid__card-button">
-                  <img
-                    src="./images/like__icon.svg"
-                    alt="Ícone de Curtir"
-                    class="grid__like-icon"
-                  />
-                </button>
-              </div>
-            </div>
+            </template>
           </section>
         </main>
         <footer class="footer">
