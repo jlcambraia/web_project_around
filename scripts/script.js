@@ -49,21 +49,6 @@ function handleProfileFormSubmit(evt) {
 
 formElement.addEventListener("submit", handleProfileFormSubmit);
 
-// Função para mostrar a mensagem "Ainda não há cartões" quando o grid de cartões está vazio
-
-function cardVisibility() {
-  let cards = document.querySelectorAll(".grid__card-container");
-  let noCardsMessage = document.querySelector(".grid__without-cards");
-
-  if (cards.length === 0) {
-    noCardsMessage.classList.remove("grid__without-cards");
-  } else {
-    noCardsMessage.classList.add("hidden");
-  }
-}
-
-cardVisibility();
-
 // Função para deixar os cards dinâmicos com JavaScript usanto tag <template>
 
 const cardsTemplate = document.querySelector("#grid__card").content;
@@ -116,6 +101,33 @@ initialCards.forEach((card) => {
   const cardElement = createCard(card);
   cardsContainer.appendChild(cardElement);
 });
+
+// Função para deletar Card quando clica no botão Deletar
+
+cardsContainer.addEventListener("click", function (evt) {
+  if (evt.target.closest(".grid__card-delete-button")) {
+    const cardElement = evt.target.closest(".grid__card");
+    if (cardElement) {
+      cardElement.remove();
+      cardVisibility();
+    }
+  }
+});
+
+// Função para mostrar a mensagem "Ainda não há cartões" quando o grid de cartões está vazio
+
+function cardVisibility() {
+  let cards = document.querySelectorAll(".grid__card-container .grid__card");
+  let noCardsMessage = document.querySelector(".grid__without-cards");
+
+  if (cards.length === 0) {
+    noCardsMessage.classList.remove("grid__without-cards");
+  } else {
+    noCardsMessage.classList.add("hidden");
+  }
+}
+
+cardVisibility();
 
 // Função para alternar o ícone de "Curtir" ao clicar no botão de curtir
 
