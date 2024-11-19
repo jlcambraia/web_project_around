@@ -1,11 +1,9 @@
 // Verificar se há cartões sempre que carregar a página
-
 document.addEventListener("DOMContentLoaded", function () {
   cardVisibility();
 });
 
 // Abrir e fechar popup de Edição e Adição no Profile
-
 const openEditButton = document.querySelector(".profile__edit-button");
 const closeEditButton = document.querySelector(
   ".profile__edit-popup-close-button"
@@ -56,7 +54,6 @@ openAddButton.addEventListener("click", () => openPopup(profileAddPopup));
 closeAddButton.addEventListener("click", () => closePopup(profileAddPopup));
 
 // Função para atualizar o Nome e a Ocupação do usuário após salvar a edição
-
 const formElement = document.querySelector(".profile__edit-popup-form");
 
 function handleProfileFormSubmit(evt) {
@@ -79,8 +76,7 @@ function handleProfileFormSubmit(evt) {
 
 formElement.addEventListener("submit", handleProfileFormSubmit);
 
-// Função para deixar os cards dinâmicos com JavaScript usanto tag <template>
-
+// Função para deixar os cards dinâmicos com JavaScript usando tag <template>
 const cardsTemplate = document.querySelector("#grid__card").content;
 const cardsContainer = document.querySelector(".grid__card-container");
 
@@ -133,7 +129,6 @@ initialCards.forEach((card) => {
 });
 
 // Função para deletar Card quando clica no botão Deletar
-
 cardsContainer.addEventListener("click", function (evt) {
   if (evt.target.closest(".grid__card-delete-button")) {
     const cardElement = evt.target.closest(".grid__card");
@@ -145,7 +140,6 @@ cardsContainer.addEventListener("click", function (evt) {
 });
 
 // Função para adicionar Card
-
 const addCardForm = document.querySelector(".profile__add-popup-form");
 
 addCardForm.addEventListener("submit", function (evt) {
@@ -176,7 +170,6 @@ addCardForm.addEventListener("submit", function (evt) {
 });
 
 // Função para mostrar a mensagem "Ainda não há cartões" quando o grid de cartões está vazio
-
 function cardVisibility() {
   const noCardsMessage = document.querySelector(".grid__without-cards");
   const cards = document.querySelectorAll(".grid__card-container .grid__card");
@@ -189,7 +182,6 @@ function cardVisibility() {
 }
 
 // Função para alternar o ícone de "Curtir" ao clicar no botão de curtir
-
 const likeButtons = document.querySelectorAll(".grid__like-icon");
 
 function toggleLike(click) {
@@ -206,7 +198,6 @@ likeButtons.forEach((button) => {
 });
 
 // Abre popup com a imagem ao clicar nela
-
 const imagePopup = document.querySelector(".grid__img-popup");
 const closeImageButton = document.querySelector(
   ".grid__image-popup-close-button"
