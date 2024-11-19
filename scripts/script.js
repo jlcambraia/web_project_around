@@ -6,21 +6,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Abrir e fechar popup de Edição e Adição no Profile
 
-let openEditButton = document.querySelector(".profile__edit-button");
-let closeEditButton = document.querySelector(
+const openEditButton = document.querySelector(".profile__edit-button");
+const closeEditButton = document.querySelector(
   ".profile__edit-popup-close-button"
 );
-let profileEditPopup = document.querySelector(".profile__edit-popup");
+const profileEditPopup = document.querySelector(".profile__edit-popup");
 
-let openAddButton = document.querySelector(".profile__add-button");
-let closeAddButton = document.querySelector(".profile__add-popup-close-button");
-let profileAddPopup = document.querySelector(".profile__add-popup");
+const openAddButton = document.querySelector(".profile__add-button");
+const closeAddButton = document.querySelector(
+  ".profile__add-popup-close-button"
+);
+const profileAddPopup = document.querySelector(".profile__add-popup");
 
-let userName = document.querySelector(".profile__user-name");
-let userAbout = document.querySelector(".profile__user-about");
+const userName = document.querySelector(".profile__user-name");
+const userAbout = document.querySelector(".profile__user-about");
 
-let inputName = document.querySelector("#profile__edit-popup-input-name");
-let inputAbout = document.querySelector("#profile__edit-popup-input-about");
+const inputName = document.querySelector("#profile__edit-popup-input-name");
+const inputAbout = document.querySelector("#profile__edit-popup-input-about");
 
 function openPopup(popup) {
   popup.classList.remove(
@@ -49,19 +51,19 @@ closeAddButton.addEventListener("click", () => closePopup(profileAddPopup));
 
 // Função para atualizar o Nome e a Ocupação do usuário após salvar a edição
 
-let formElement = document.querySelector(".profile__edit-popup-form");
+const formElement = document.querySelector(".profile__edit-popup-form");
 
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
 
-  let nameInput = document.querySelector("#profile__edit-popup-input-name");
-  let jobInput = document.querySelector("#profile__edit-popup-input-about");
+  const nameInput = document.querySelector("#profile__edit-popup-input-name");
+  const jobInput = document.querySelector("#profile__edit-popup-input-about");
 
-  let newName = nameInput.value;
-  let newJob = jobInput.value;
+  const newName = nameInput.value;
+  const newJob = jobInput.value;
 
-  let displayName = document.querySelector(".profile__user-name");
-  let displayJob = document.querySelector(".profile__user-about");
+  const displayName = document.querySelector(".profile__user-name");
+  const displayJob = document.querySelector(".profile__user-about");
 
   displayName.textContent = newName;
   displayJob.textContent = newJob;
@@ -124,6 +126,8 @@ initialCards.forEach((card) => {
   cardsContainer.appendChild(cardElement);
 });
 
+// Função para adicionar um cartão
+
 // Função para deletar Card quando clica no botão Deletar
 
 cardsContainer.addEventListener("click", function (evt) {
@@ -139,8 +143,8 @@ cardsContainer.addEventListener("click", function (evt) {
 // Função para mostrar a mensagem "Ainda não há cartões" quando o grid de cartões está vazio
 
 function cardVisibility() {
-  let cards = document.querySelectorAll(".grid__card-container .grid__card");
-  let noCardsMessage = document.querySelector(".grid__without-cards");
+  const cards = document.querySelectorAll(".grid__card-container .grid__card");
+  const noCardsMessage = document.querySelector(".grid__without-cards");
 
   if (cards.length === 0) {
     noCardsMessage.classList.remove("grid__without-cards");
@@ -153,10 +157,10 @@ cardVisibility();
 
 // Função para alternar o ícone de "Curtir" ao clicar no botão de curtir
 
-let likeButtons = document.querySelectorAll(".grid__like-icon");
+const likeButtons = document.querySelectorAll(".grid__like-icon");
 
 function toggleLike(click) {
-  let likeIcon = click.target;
+  const likeIcon = click.target;
   if (likeIcon.getAttribute("src") === "./images/like__icon.svg") {
     likeIcon.setAttribute("src", "./images/like__icon_active.svg");
   } else {
