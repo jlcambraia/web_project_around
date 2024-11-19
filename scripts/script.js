@@ -140,13 +140,13 @@ cardsContainer.addEventListener("click", function (evt) {
 
 // Função para adicionar Card
 
-let addCardForm = document.querySelector(".profile__add-popup-form");
+const addCardForm = document.querySelector(".profile__add-popup-form");
 
 addCardForm.addEventListener("submit", function (evt) {
   evt.preventDefault();
 
-  let inputTitle = document.querySelector("#profile__add-popup-input-name");
-  let inputLink = document.querySelector("#profile__add-popup-input-about");
+  const inputTitle = document.querySelector("#profile__add-popup-input-name");
+  const inputLink = document.querySelector("#profile__add-popup-input-about");
 
   const newCard = {
     name: inputTitle.value,
@@ -172,8 +172,8 @@ addCardForm.addEventListener("submit", function (evt) {
 // Função para mostrar a mensagem "Ainda não há cartões" quando o grid de cartões está vazio
 
 function cardVisibility() {
-  let noCardsMessage = document.querySelector(".grid__without-cards");
-  let cards = document.querySelectorAll(".grid__card-container .grid__card");
+  const noCardsMessage = document.querySelector(".grid__without-cards");
+  const cards = document.querySelectorAll(".grid__card-container .grid__card");
 
   if (cards.length === 0) {
     noCardsMessage.style.display = "block";
