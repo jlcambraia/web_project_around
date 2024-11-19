@@ -136,20 +136,49 @@ cardsContainer.addEventListener("click", function (evt) {
   }
 });
 
+// Função para adicionar Card
+
+let addCardForm = document.querySelector(".profile__add-popup-form");
+
+addCardForm.addEventListener("submit", function (evt) {
+  evt.preventDefault();
+
+  let inputTitle = document.querySelector("#profile__add-popup-input-name");
+  let inputLink = document.querySelector("#profile__add-popup-input-about");
+
+  const newCard = {
+    name: inputTitle.value,
+    link: inputLink.value,
+    alt: `Imagem do local chamado ${inputTitle.value}`,
+  };
+
+  const cardElement = createCard(newCard);
+
+  cardElement
+    .querySelector(".grid__like-icon")
+    .addEventListener("click", toggleLike);
+
+  cardsContainer.prepend(cardElement);
+
+  inputTitle.value = "";
+  inputLink.value = "";
+
+  cardVisibility();
+  closePopup(profileAddPopup);
+});
+
 // Função para mostrar a mensagem "Ainda não há cartões" quando o grid de cartões está vazio
 
 function cardVisibility() {
-  let cards = document.querySelectorAll(".grid__card-container .grid__card");
   let noCardsMessage = document.querySelector(".grid__without-cards");
+  let cards = document.querySelectorAll(".grid__card-container .grid__card");
 
   if (cards.length === 0) {
-    noCardsMessage.classList.remove("grid__without-cards");
+    noCardsMessage.style.display = "block";
   } else {
-    noCardsMessage.classList.add("hidden");
+    noCardsMessage.style.display = "none";
   }
 }
-
-cardVisibility();
 
 // Função para alternar o ícone de "Curtir" ao clicar no botão de curtir
 
