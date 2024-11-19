@@ -126,8 +126,6 @@ initialCards.forEach((card) => {
   cardsContainer.appendChild(cardElement);
 });
 
-// Função para adicionar um cartão
-
 // Função para deletar Card quando clica no botão Deletar
 
 cardsContainer.addEventListener("click", function (evt) {
