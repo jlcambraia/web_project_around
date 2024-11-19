@@ -24,22 +24,28 @@ const userAbout = document.querySelector(".profile__user-about");
 const inputName = document.querySelector("#profile__edit-popup-input-name");
 const inputAbout = document.querySelector("#profile__edit-popup-input-about");
 
-function openPopup(popup) {
+function openPopup(popup, imageSrc = null) {
   popup.classList.remove(
     "profile__edit-popup_hidden",
-    "profile__add-popup_hidden"
+    "profile__add-popup_hidden",
+    "grid__img-popup_hidden"
   );
 
   if (popup === profileEditPopup) {
     inputName.value = userName.textContent;
     inputAbout.value = userAbout.textContent;
   }
+
+  if (popup === imagePopup && imageSrc) {
+    imagePopupImg.src = imageSrc;
+  }
 }
 
 function closePopup(popup) {
   popup.classList.add(
     "profile__edit-popup_hidden",
-    "profile__add-popup_hidden"
+    "profile__add-popup_hidden",
+    "grid__img-popup_hidden"
   );
 }
 
@@ -202,7 +208,9 @@ likeButtons.forEach((button) => {
 // Abre popup com a imagem ao clicar nela
 
 const imagePopup = document.querySelector(".grid__img-popup");
-const closeButton = document.querySelector(".grid__image-popup-close-button");
+const closeImageButton = document.querySelector(
+  ".grid__image-popup-close-button"
+);
 const imagePopupImg = document.querySelector(".grid__image-popup-img");
 
 cardsContainer.addEventListener("click", function (evt) {
@@ -210,12 +218,10 @@ cardsContainer.addEventListener("click", function (evt) {
 
   if (image) {
     const imageSrc = image.src;
-
-    imagePopup.classList.remove("grid__img-popup_hidden");
-    imagePopupImg.src = imageSrc;
+    openPopup(imagePopup, imageSrc);
   }
 });
 
-closeButton.addEventListener("click", function () {
-  imagePopup.classList.add("grid__img-popup_hidden");
+closeImageButton.addEventListener("click", function () {
+  closePopup(imagePopup);
 });
