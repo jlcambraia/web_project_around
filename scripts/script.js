@@ -198,3 +198,24 @@ function toggleLike(click) {
 likeButtons.forEach((button) => {
   button.addEventListener("click", toggleLike);
 });
+
+// Abre popup com a imagem ao clicar nela
+
+const imagePopup = document.querySelector(".grid__img-popup");
+const closeButton = document.querySelector(".grid__image-popup-close-button");
+const imagePopupImg = document.querySelector(".grid__image-popup-img");
+
+cardsContainer.addEventListener("click", function (evt) {
+  const image = evt.target.closest(".grid__img");
+
+  if (image) {
+    const imageSrc = image.src;
+
+    imagePopup.classList.remove("grid-img-popup_hidden");
+    imagePopupImg.src = imageSrc;
+  }
+});
+
+closeButton.addEventListener("click", function () {
+  imagePopup.classList.add("grid-img-popup_hidden");
+});
