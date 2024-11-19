@@ -87,7 +87,7 @@
   z-index: 1;
 }
 
-.grid__img-popup.grid-img-popup_hidden {
+.grid__img-popup_hidden {
   display: none;
 }
 

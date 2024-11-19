@@ -211,11 +211,11 @@ cardsContainer.addEventListener("click", function (evt) {
   if (image) {
     const imageSrc = image.src;
 
-    imagePopup.classList.remove("grid-img-popup_hidden");
+    imagePopup.classList.remove("grid__img-popup_hidden");
     imagePopupImg.src = imageSrc;
   }
 });
 
 closeButton.addEventListener("click", function () {
-  imagePopup.classList.add("grid-img-popup_hidden");
+  imagePopup.classList.add("grid__img-popup_hidden");
 });
