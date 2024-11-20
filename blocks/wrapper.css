@@ -6,6 +6,7 @@
 
 @media screen and (max-width: 544px) {
   .wrapper {
-    padding: 28px 20px 36px;
+    padding: 28px 0 36px;
+    width: 90%;
   }
 }

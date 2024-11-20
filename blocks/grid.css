@@ -135,6 +135,20 @@
     justify-self: center;
   }
 
+  .grid__card {
+    width: 270px;
+    justify-self: center;
+  }
+
+  .grid__img {
+    width: 100%;
+    height: auto;
+  }
+
+  .grid__card-footer {
+    width: 100%;
+  }
+
   .grid__img-popup-content {
     width: 80%;
   }
