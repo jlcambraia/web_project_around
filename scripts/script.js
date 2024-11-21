@@ -22,7 +22,7 @@ const userAbout = document.querySelector(".profile__user-about");
 const inputName = document.querySelector("#profile__edit-popup-input-name");
 const inputAbout = document.querySelector("#profile__edit-popup-input-about");
 
-function openPopup(popup, imageSrc = null) {
+function openPopup(popup, imageSrc = null, imageTitle = null) {
   popup.classList.remove(
     "profile__edit-popup_hidden",
     "profile__add-popup_hidden",
@@ -34,8 +34,13 @@ function openPopup(popup, imageSrc = null) {
     inputAbout.value = userAbout.textContent;
   }
 
-  if (popup === imagePopup && imageSrc) {
-    imagePopupImg.src = imageSrc;
+  if (popup === imagePopup) {
+    if (imageSrc) {
+      imagePopupImg.src = imageSrc;
+    }
+    if (imageTitle) {
+      imagePopupTitle.textContent = imageTitle;
+    }
   }
 }
 
@@ -117,8 +122,10 @@ function createCard(cardData) {
   const cardElement = cardsTemplate
     .querySelector(".grid__card")
     .cloneNode(true);
-  cardElement.querySelector(".grid__img").src = cardData.link;
-  cardElement.querySelector(".grid__img").alt = cardData.alt;
+  const imageElement = cardElement.querySelector(".grid__img");
+  imageElement.src = cardData.link;
+  imageElement.alt = cardData.alt;
+  imageElement.name = cardData.name;
   cardElement.querySelector(".grid__card-title").textContent = cardData.name;
   return cardElement;
 }
@@ -203,13 +210,15 @@ const closeImageButton = document.querySelector(
   ".grid__image-popup-close-button"
 );
 const imagePopupImg = document.querySelector(".grid__image-popup-img");
+const imagePopupTitle = document.querySelector(".grid__image-popup-title");
 
 cardsContainer.addEventListener("click", function (evt) {
   const image = evt.target.closest(".grid__img");
 
   if (image) {
     const imageSrc = image.src;
-    openPopup(imagePopup, imageSrc);
+    const imageTitle = image.name || "Sem título";
+    openPopup(imagePopup, imageSrc, imageTitle);
   }
 });
 

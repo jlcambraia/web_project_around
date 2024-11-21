@@ -107,6 +107,11 @@
   max-height: 80vh;
 }
 
+.grid__image-popup-title {
+  margin: 10px 0 0;
+  font-size: 12px;
+}
+
 .grid__image-popup-close-button {
   border: none;
   background-color: transparent;
@@ -146,6 +151,10 @@
 
   .grid__card-footer {
     width: 100%;
+  }
+
+  .grid__like-icon:hover {
+    filter: none;
   }
 
   .grid__img-popup-content {
