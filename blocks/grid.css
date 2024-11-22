@@ -65,9 +65,6 @@
 .grid__card-footer-button {
   display: flex;
   align-items: center;
-}
-
-.grid__card-footer-button {
   border: none;
   padding: 0;
   background-color: transparent;
