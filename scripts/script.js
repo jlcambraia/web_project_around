@@ -183,3 +183,12 @@ function toggleNoCardsMessage() {
 }
 
 toggleNoCardsMessage();
+
+// Fechar popup clicando em Esc
+document.addEventListener("keydown", (evt) => {
+  if (evt.key === "Escape") {
+    const openedPopups = document.querySelectorAll(".popup:not(.popup_hidden)");
+    openedPopups.forEach((popup) => closePopup(popup));
+    document.activeElement.blur();
+  }
+});
