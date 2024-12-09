@@ -1,90 +1,70 @@
-// Verificar se há cartões sempre que carregar a página
-document.addEventListener("DOMContentLoaded", function () {
-  cardVisibility();
-});
-
-// Abrir e fechar popup de Edição e Adição no Profile
-const openEditButton = document.querySelector(".profile__edit-button");
-const closeEditButton = document.querySelector(
-  ".profile__edit-popup-close-button"
-);
-const profileEditPopup = document.querySelector(".profile__edit-popup");
-
-const openAddButton = document.querySelector(".profile__add-button");
-const closeAddButton = document.querySelector(
-  ".profile__add-popup-close-button"
-);
-const profileAddPopup = document.querySelector(".profile__add-popup");
-
+// Variáveis
+const popupEditButton = document.querySelector(".profile__edit-button");
+const popupAddButton = document.querySelector(".profile__add-button");
+const popups = document.querySelectorAll(".popup");
+const popupEdit = document.querySelector(".popup_type_edit");
+const popupAdd = document.querySelector(".popup_type_add");
+const popupImage = document.querySelector(".popup_type_image");
+const popupCloseButtons = document.querySelectorAll(".popup__close-button");
+const popupInputName = document.querySelector("#popup__input-name");
+const popupInputAbout = document.querySelector("#popup__input-about");
+const popupInputTitle = document.querySelector("#popup__input-title");
+const popupInputLink = document.querySelector("#popup__input-link");
 const userName = document.querySelector(".profile__user-name");
 const userAbout = document.querySelector(".profile__user-about");
+const popupSaveEditButton = document.querySelector("#popup__save-edit-button");
+const popupSaveAddButton = document.querySelector("#popup__save-add-button");
+const gridContainer = document.querySelector(".grid__card-container");
+const popupImageImg = document.querySelector(".popup__image");
+const popupImageCaption = document.querySelector(".popup__caption");
+const noCardsMessage = document.querySelector(".grid__without-cards-text");
 
-const inputName = document.querySelector("#profile__edit-popup-input-name");
-const inputAbout = document.querySelector("#profile__edit-popup-input-about");
+// Funções para abrir e fechar popups
+function openPopup(popup) {
+  const form = popup.querySelector(".popup__form");
 
-function openPopup(popup, imageSrc = null, imageTitle = null) {
-  popup.classList.remove(
-    "profile__edit-popup_hidden",
-    "profile__add-popup_hidden",
-    "grid__img-popup_hidden"
-  );
+  // Resetar o formulário antes de abrir o popup
+  resetForm(form);
 
-  if (popup === profileEditPopup) {
-    inputName.value = userName.textContent;
-    inputAbout.value = userAbout.textContent;
+  if (popup.classList.contains("popup_type_edit")) {
+    popupInputName.value = userName.textContent;
+    popupInputAbout.value = userAbout.textContent;
+
+    // Ativar o botão de "Salvar" se os campos já estiverem preenchidos
+    if (popupInputName.value && popupInputAbout.value) {
+      popupSaveEditButton.classList.remove("popup__save-button_disabled");
+      popupSaveEditButton.disabled = false;
+    }
   }
 
-  if (popup === imagePopup) {
-    if (imageSrc) {
-      imagePopupImg.src = imageSrc;
-    }
-    if (imageTitle) {
-      imagePopupTitle.textContent = imageTitle;
-    }
-  }
+  popup.classList.remove("popup_hidden");
 }
 
 function closePopup(popup) {
-  popup.classList.add(
-    "profile__edit-popup_hidden",
-    "profile__add-popup_hidden",
-    "grid__img-popup_hidden"
-  );
+  popup.classList.add("popup_hidden");
 }
 
-openEditButton.addEventListener("click", () => openPopup(profileEditPopup));
-closeEditButton.addEventListener("click", () => closePopup(profileEditPopup));
+popupEditButton.addEventListener("click", () => openPopup(popupEdit));
+popupAddButton.addEventListener("click", () => openPopup(popupAdd));
 
-openAddButton.addEventListener("click", () => openPopup(profileAddPopup));
-closeAddButton.addEventListener("click", () => closePopup(profileAddPopup));
+popupCloseButtons.forEach((button) => {
+  button.addEventListener("click", (evt) => {
+    const popup = evt.target.closest(".popup");
+    closePopup(popup);
+  });
+});
 
-// Função para atualizar o Nome e a Ocupação do usuário após salvar a edição
-const formElement = document.querySelector(".profile__edit-popup-form");
-
-function handleProfileFormSubmit(evt) {
+// Função para salvar novos dados de nome e sobre
+function saveNewInfo(evt) {
   evt.preventDefault();
-
-  const nameInput = document.querySelector("#profile__edit-popup-input-name");
-  const jobInput = document.querySelector("#profile__edit-popup-input-about");
-
-  const newName = nameInput.value;
-  const newJob = jobInput.value;
-
-  const displayName = document.querySelector(".profile__user-name");
-  const displayJob = document.querySelector(".profile__user-about");
-
-  displayName.textContent = newName;
-  displayJob.textContent = newJob;
-
-  closePopup(profileEditPopup);
+  userName.textContent = popupInputName.value;
+  userAbout.textContent = popupInputAbout.value;
+  closePopup(popupEdit);
 }
 
-formElement.addEventListener("submit", handleProfileFormSubmit);
+popupSaveEditButton.addEventListener("click", saveNewInfo);
 
-// Função para deixar os cards dinâmicos com JavaScript usando tag <template>
-const cardsTemplate = document.querySelector("#grid__card").content;
-const cardsContainer = document.querySelector(".grid__card-container");
-
+// Subir com cards iniciais para a página
 const initialCards = [
   {
     name: "Vale de Yosemite",
@@ -118,110 +98,88 @@ const initialCards = [
   },
 ];
 
-function createCard(cardData) {
-  const cardElement = cardsTemplate
-    .querySelector(".grid__card")
-    .cloneNode(true);
-  const imageElement = cardElement.querySelector(".grid__img");
-  imageElement.src = cardData.link;
-  imageElement.alt = cardData.alt;
-  imageElement.name = cardData.name;
-  cardElement.querySelector(".grid__card-title").textContent = cardData.name;
-  return cardElement;
-}
-
 initialCards.forEach((card) => {
-  const cardElement = createCard(card);
-  cardsContainer.appendChild(cardElement);
+  const cardTemplate = document
+    .querySelector("#grid__card")
+    .content.cloneNode(true);
+  const cardImage = cardTemplate.querySelector(".grid__img");
+  const cardTitle = cardTemplate.querySelector(".grid__card-title");
+
+  cardImage.src = card.link;
+  cardImage.alt = card.alt;
+  cardTitle.textContent = card.name;
+
+  gridContainer.appendChild(cardTemplate);
 });
 
-// Função para deletar Card quando clica no botão Deletar
-cardsContainer.addEventListener("click", function (evt) {
-  if (evt.target.closest(".grid__card-delete-button")) {
-    const cardElement = evt.target.closest(".grid__card");
-    if (cardElement) {
-      cardElement.remove();
-      cardVisibility();
+// Adicionar novos cards
+function addCards(evt) {
+  evt.preventDefault();
+  const cardTemplate = document
+    .querySelector("#grid__card")
+    .content.cloneNode(true);
+  const cardImage = cardTemplate.querySelector(".grid__img");
+  const cardTitle = cardTemplate.querySelector(".grid__card-title");
+
+  cardImage.src = popupInputLink.value;
+  cardImage.alt = `Imagem de ${popupInputTitle.value}`;
+  cardTitle.textContent = popupInputTitle.value;
+
+  gridContainer.prepend(cardTemplate);
+
+  popupInputLink.value = "";
+  popupInputTitle.value = "";
+
+  toggleNoCardsMessage();
+  closePopup(popupAdd);
+}
+
+popupSaveAddButton.addEventListener("click", addCards);
+
+// Ativa a função para os botões like
+gridContainer.addEventListener("click", (evt) => {
+  if (evt.target.classList.contains("grid__like-icon")) {
+    const likeIcon = evt.target;
+    if (likeIcon.getAttribute("src") === "./images/like__icon.svg") {
+      likeIcon.setAttribute("src", "./images/like__icon_active.svg");
+    } else {
+      likeIcon.setAttribute("src", "./images/like__icon.svg");
     }
   }
 });
 
-// Função para adicionar Card
-const addCardForm = document.querySelector(".profile__add-popup-form");
-
-addCardForm.addEventListener("submit", function (evt) {
-  evt.preventDefault();
-
-  const inputTitle = document.querySelector("#profile__add-popup-input-name");
-  const inputLink = document.querySelector("#profile__add-popup-input-about");
-
-  const newCard = {
-    name: inputTitle.value,
-    link: inputLink.value,
-    alt: `Imagem do local chamado ${inputTitle.value}`,
-  };
-
-  const cardElement = createCard(newCard);
-
-  cardElement
-    .querySelector(".grid__like-icon")
-    .addEventListener("click", toggleLike);
-
-  cardsContainer.prepend(cardElement);
-
-  inputTitle.value = "";
-  inputLink.value = "";
-
-  cardVisibility();
-  closePopup(profileAddPopup);
+// Deleta card clicando no botão de lixeira
+gridContainer.addEventListener("click", (evt) => {
+  if (evt.target.classList.contains("grid__delete-icon")) {
+    const cardToDelete = evt.target.closest(".grid__card");
+    cardToDelete.remove();
+    toggleNoCardsMessage();
+  }
 });
 
-// Função para mostrar a mensagem "Ainda não há cartões" quando o grid de cartões está vazio
-function cardVisibility() {
-  const noCardsMessage = document.querySelector(".grid__without-cards");
-  const cards = document.querySelectorAll(".grid__card-container .grid__card");
+//Abrir e fechar popup da imagem
 
-  if (cards.length === 0) {
-    noCardsMessage.style.display = "block";
+gridContainer.addEventListener("click", (evt) => {
+  if (evt.target.classList.contains("grid__img")) {
+    const cardImage = evt.target;
+    const cardTitle = evt.target
+      .closest(".grid__card")
+      .querySelector(".grid__card-title");
+
+    popupImage.classList.remove("popup_hidden");
+    popupImageImg.src = cardImage.src;
+    popupImageCaption.textContent = cardTitle.textContent;
+  }
+});
+
+// Esconder mensagem de que não há cartões
+
+function toggleNoCardsMessage() {
+  if (gridContainer.children.length === 0) {
+    noCardsMessage.classList.remove("grid__without-cards-text_hidden");
   } else {
-    noCardsMessage.style.display = "none";
+    noCardsMessage.classList.add("grid__without-cards-text_hidden");
   }
 }
 
-// Função para alternar o ícone de "Curtir" ao clicar no botão de curtir
-const likeButtons = document.querySelectorAll(".grid__like-icon");
-
-function toggleLike(click) {
-  const likeIcon = click.target;
-  if (likeIcon.getAttribute("src") === "./images/like__icon.svg") {
-    likeIcon.setAttribute("src", "./images/like__icon_active.svg");
-  } else {
-    likeIcon.setAttribute("src", "./images/like__icon.svg");
-  }
-}
-
-likeButtons.forEach((button) => {
-  button.addEventListener("click", toggleLike);
-});
-
-// Abre popup com a imagem ao clicar nela
-const imagePopup = document.querySelector(".grid__img-popup");
-const closeImageButton = document.querySelector(
-  ".grid__image-popup-close-button"
-);
-const imagePopupImg = document.querySelector(".grid__image-popup-img");
-const imagePopupTitle = document.querySelector(".grid__image-popup-title");
-
-cardsContainer.addEventListener("click", function (evt) {
-  const image = evt.target.closest(".grid__img");
-
-  if (image) {
-    const imageSrc = image.src;
-    const imageTitle = image.name || "Sem título";
-    openPopup(imagePopup, imageSrc, imageTitle);
-  }
-});
-
-closeImageButton.addEventListener("click", function () {
-  closePopup(imagePopup);
-});
+toggleNoCardsMessage();
