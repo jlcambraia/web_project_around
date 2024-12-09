@@ -192,3 +192,15 @@ document.addEventListener("keydown", (evt) => {
     document.activeElement.blur();
   }
 });
+
+// Fechar popup clicando fora do card
+popups.forEach((popup) => {
+  popup.addEventListener("click", (evt) => {
+    if (
+      !evt.target.closest(".popup__card") &&
+      !evt.target.closest(".popup__content")
+    ) {
+      closePopup(popup);
+    }
+  });
+});
