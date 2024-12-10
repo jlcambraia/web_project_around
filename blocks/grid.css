@@ -1,3 +1,7 @@
+.grid {
+  display: grid;
+}
+
 .grid__card-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
