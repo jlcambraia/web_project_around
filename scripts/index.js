@@ -1,4 +1,5 @@
 import Card from "./Card.js";
+import Section from "./Section.js";
 import {
   initialCards,
   gridContainer,
@@ -17,13 +18,24 @@ import {
   openImagePopup,
   closePopupOnOverlay,
   closePopupOnEscKey,
+  gridContainerSelector,
 } from "./utils.js";
 
 // Subir cartões dinamicamente para página
-initialCards.forEach((card) => {
-  const newCard = new Card(card, "#grid__card");
-  gridContainer.append(newCard.generateCard());
-});
+const cardList = new Section(
+  {
+    items: initialCards,
+    renderer: (card) => {
+      const newCard = new Card(card, "#grid__card");
+      const cardElement = newCard.generateCard();
+
+      cardList.addItem(cardElement);
+    },
+  },
+  gridContainerSelector
+);
+
+cardList.renderer();
 
 // Ouvintes de evento
 editButton.addEventListener("click", () => {

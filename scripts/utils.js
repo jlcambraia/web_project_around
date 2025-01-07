@@ -57,6 +57,9 @@ const popupCaption = document.querySelector(".popup__caption");
 const gridMessage = document.querySelector(".grid__without-cards-text");
 export const popups = document.querySelector(".popups");
 
+export const gridContainerSelector = ".grid__card-container";
+
+// VERIFICAR SE ESTA CHAMADA DE FUNÇÃO ESTÁ SENDO NECESSÁRIA
 noCardsMessage();
 
 // Função para abrir popups
