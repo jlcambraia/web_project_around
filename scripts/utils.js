@@ -59,9 +59,6 @@ export const popups = document.querySelector(".popups");
 
 export const gridContainerSelector = ".grid__card-container";
 
-// VERIFICAR SE ESTA CHAMADA DE FUNÇÃO ESTÁ SENDO NECESSÁRIA
-noCardsMessage();
-
 // Função para abrir popups
 export function openPopup(popup) {
   popup.classList.remove("popup_hidden");
