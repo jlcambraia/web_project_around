@@ -1,28 +1,48 @@
-import { Card } from "./Card.js";
-import { FormValidator } from "./FormValidator.js";
+import Card from "./Card.js";
 import {
-  popupCloseButtons,
-  gridContainer,
   initialCards,
-  closePopup,
-  validationConfig,
-  formList,
+  gridContainer,
+  editButton,
+  addButton,
+  editPopup,
+  addPopup,
+  editSaveButton,
+  addSaveButton,
+  popups,
+  openPopup,
+  saveProfileInfo,
+  addNewCard,
+  openPopupWithNameAndAbout,
+  handleCloseButtons,
+  openImagePopup,
+  closePopupOnOverlay,
+  closePopupOnEscKey,
 } from "./utils.js";
 
-popupCloseButtons.forEach((button) => {
-  button.addEventListener("click", (evt) => {
-    const popup = evt.target.closest(".popup");
-    closePopup(popup);
-  });
+// Subir cartões dinamicamente para página
+initialCards.forEach((card) => {
+  const newCard = new Card(card, "#grid__card");
+  gridContainer.append(newCard.generateCard());
 });
 
-initialCards.forEach((cardData) => {
-  const card = new Card(cardData, "#grid__card");
-  const cardElement = card.generateCard();
-  gridContainer.appendChild(cardElement);
+// Ouvintes de evento
+editButton.addEventListener("click", () => {
+  openPopupWithNameAndAbout();
+  openPopup(editPopup);
 });
 
-formList.forEach((formElement) => {
-  const formValidator = new FormValidator(validationConfig, formElement);
-  formValidator.enableValidation();
+editSaveButton.addEventListener("click", saveProfileInfo);
+
+addButton.addEventListener("click", () => {
+  openPopup(addPopup);
 });
+
+addSaveButton.addEventListener("click", addNewCard);
+
+popups.addEventListener("click", handleCloseButtons);
+
+gridContainer.addEventListener("click", openImagePopup);
+
+document.addEventListener("click", closePopupOnOverlay);
+
+document.addEventListener("keydown", closePopupOnEscKey);
