@@ -1,5 +1,8 @@
 import Card from "./Card.js";
+import PopupWithForm from "./PopupWithForm.js";
 import FormValidator from "./FormValidator.js";
+import { editPopupInstance } from "./index.js";
+import { addPopupInstance } from "./index.js";
 
 // Cards iniciais
 export const initialCards = [
@@ -41,7 +44,6 @@ export const editButton = document.querySelector(".profile__edit-button");
 export const addButton = document.querySelector(".profile__add-button");
 export const editPopup = document.querySelector(".popup_type_edit");
 export const addPopup = document.querySelector(".popup_type_add");
-const imagePopup = document.querySelector(".popup_type_image");
 const editProfileName = document.querySelector(".profile__user-name");
 const editProfileAbout = document.querySelector(".profile__user-about");
 const editInputName = document.querySelector("#popup__input-name");
@@ -52,8 +54,6 @@ export const editSaveButton = document.querySelector(
   "#popup__save-edit-button"
 );
 export const addSaveButton = document.querySelector("#popup__save-add-button");
-const popupImage = document.querySelector(".popup__image");
-const popupCaption = document.querySelector(".popup__caption");
 const gridMessage = document.querySelector(".grid__without-cards-text");
 export const popups = document.querySelectorAll(".popups");
 
@@ -67,11 +67,23 @@ export function openPopupWithNameAndAbout() {
 }
 
 // Salvar edição de name e about
-export function saveProfileInfo(evt) {
-  evt.preventDefault();
-  editProfileName.textContent = editInputName.value;
-  editProfileAbout.textContent = editInputAbout.value;
-  closePopup(editPopup);
+export function saveProfileInfo(inputValue) {
+  editProfileName.textContent = inputValue.name;
+  editProfileAbout.textContent = inputValue.about;
+  editPopupInstance.close();
+}
+
+// Função para adicionar novas imagens ao grid
+export function addNewCard(inputValue) {
+  const newCardData = {
+    name: inputValue.title,
+    link: inputValue.link,
+    alt: `Imagem de ${inputValue.title}`,
+  };
+
+  const newCard = new Card(newCardData, "#grid__card");
+  gridContainer.prepend(newCard.generateCard());
+  addPopupInstance.close();
 }
 
 // Função para verificar se há cards no grid
@@ -107,26 +119,6 @@ export function resetPopup() {
     buttonElement.classList.add("popup__save-button_disabled");
     buttonElement.setAttribute("disabled", true);
   });
-}
-
-// Função para adicionar novas imagens ao grid
-export function addNewCard(evt) {
-  evt.preventDefault();
-
-  const newCardData = {
-    name: addInputTitle.value,
-    link: addInputLink.value,
-    alt: `Imagem de ${addInputTitle.value}`,
-  };
-
-  const newCard = new Card(newCardData, "#grid__card");
-  gridContainer.prepend(newCard.generateCard());
-
-  addInputLink.value = "";
-  addInputTitle.value = "";
-
-  closePopup(addPopup);
-  noCardsMessage();
 }
 
 // Configuração para validação

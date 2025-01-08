@@ -1,5 +1,3 @@
-import { resetPopup } from "./utils.js";
-
 export default class Popup {
   constructor(popupSelector) {
     this._popup = document.querySelector(popupSelector);
@@ -14,7 +12,6 @@ export default class Popup {
   close() {
     this._popup.classList.add("popup_hidden");
     document.removeEventListener("keydown", this._handleEscClose);
-    resetPopup();
   }
 
   _handleEscClose = (evt) => {

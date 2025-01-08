@@ -1,6 +1,7 @@
 import Card from "./Card.js";
 import Popup from "./Popup.js";
 import PopupWithImage from "./PopupWithImage.js";
+import PopupWithForm from "./PopupWithForm.js";
 import Section from "./Section.js";
 import {
   initialCards,
@@ -30,9 +31,16 @@ const cardList = new Section(
 
 cardList.renderer();
 
-// Instância para abrir edit e add popup
-const editPopupInstance = new Popup(".popup_type_edit");
-const addPopupInstance = new Popup(".popup_type_add");
+// Início da instância para o PopupWithForm
+
+export const editPopupInstance = new PopupWithForm(
+  ".popup_type_edit",
+  saveProfileInfo
+);
+export const addPopupInstance = new PopupWithForm(
+  ".popup_type_add",
+  addNewCard
+);
 
 editButton.addEventListener("click", () => {
   editPopupInstance.open();
@@ -42,7 +50,7 @@ addButton.addEventListener("click", () => {
   addPopupInstance.open();
 });
 
-// Fim da instância para abrir edit e add popup
+// Fim da instância para o PopupWithForm
 
 // Instância para abrir image popup
 
@@ -62,6 +70,6 @@ gridContainer.addEventListener("click", (evt) => {
 
 // Fim da instância para abrir image popup
 
-editSaveButton.addEventListener("click", saveProfileInfo);
+// editSaveButton.addEventListener("click", saveProfileInfo);
 
-addSaveButton.addEventListener("click", addNewCard);
+// addSaveButton.addEventListener("click", addNewCard);

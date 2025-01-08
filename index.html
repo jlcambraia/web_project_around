@@ -91,9 +91,10 @@
             <div class="popup popup_hidden popup_type_edit">
               <div class="popup__card">
                 <h2 class="popup__title">Editar perfil</h2>
-                <form class="popup__form" novalidate>
+                <form class="popup__form" name="edit-popup" novalidate>
                   <div class="popup__input-wrapper">
                     <input
+                      name="name"
                       id="popup__input-name"
                       class="popup__input"
                       type="text"
@@ -109,6 +110,7 @@
                   </div>
                   <div class="popup__input-wrapper">
                     <input
+                      name="about"
                       id="popup__input-about"
                       class="popup__input popup__input_margin-large"
                       type="text"
@@ -144,9 +146,10 @@
             <div class="popup popup_hidden popup_type_add">
               <div class="popup__card">
                 <h2 class="popup__title">Novo local</h2>
-                <form class="popup__form" novalidate>
+                <form class="popup__form" name="add-popup" novalidate>
                   <div class="popup__input-wrapper">
                     <input
+                      name="title"
                       id="popup__input-title"
                       class="popup__input"
                       type="text"
@@ -162,6 +165,7 @@
                   </div>
                   <div class="popup__input-wrapper">
                     <input
+                      name="link"
                       id="popup__input-link"
                       class="popup__input popup__input_margin-large"
                       type="url"
