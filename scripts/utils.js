@@ -55,34 +55,15 @@ export const addSaveButton = document.querySelector("#popup__save-add-button");
 const popupImage = document.querySelector(".popup__image");
 const popupCaption = document.querySelector(".popup__caption");
 const gridMessage = document.querySelector(".grid__without-cards-text");
-export const popups = document.querySelector(".popups");
+export const popups = document.querySelectorAll(".popups");
 
+// Novos seletores
 export const gridContainerSelector = ".grid__card-container";
-
-// Função para abrir popups
-export function openPopup(popup) {
-  popup.classList.remove("popup_hidden");
-}
-
-// Função para fechar popups
-function closePopup(popup) {
-  popup.classList.add("popup_hidden");
-  resetPopup();
-}
 
 // Função para abrir edit popup já com o name e about preenchidos
 export function openPopupWithNameAndAbout() {
   editInputName.value = editProfileName.textContent;
   editInputAbout.value = editProfileAbout.textContent;
-}
-
-// Função que seleciona todos os botões de fechar popup e fazem eles funcionar
-export function handleCloseButtons(evt) {
-  const closeButton = evt.target;
-  if (closeButton.classList.contains("popup__close-button-icon")) {
-    const targetPopup = closeButton.closest(".popup");
-    closePopup(targetPopup);
-  }
 }
 
 // Salvar edição de name e about
@@ -91,46 +72,6 @@ export function saveProfileInfo(evt) {
   editProfileName.textContent = editInputName.value;
   editProfileAbout.textContent = editInputAbout.value;
   closePopup(editPopup);
-}
-
-// Função para abrir popup de imagens
-export function openImagePopup(evt) {
-  const targetButton = evt.target;
-
-  if (targetButton.classList.contains("grid__img")) {
-    openPopup(imagePopup);
-    popupImage.src = targetButton.src;
-
-    const card = targetButton.closest(".grid__card");
-    const cardTitle = card.querySelector(".grid__card-title");
-
-    popupCaption.textContent = cardTitle.textContent;
-  }
-}
-
-// Função para fechar popup clicando fora do card
-export function closePopupOnOverlay(evt) {
-  const popup = evt.target.closest(".popup");
-  if (evt.target.classList.contains("popup")) {
-    closePopup(popup);
-  }
-}
-
-// Função para fechar popup pressionando tecla esc
-export function closePopupOnEscKey(evt) {
-  if (evt.key === "Escape") {
-    const activeElement = document.activeElement;
-    if (activeElement) {
-      activeElement.blur();
-    }
-
-    const popups = document.querySelectorAll(".popup");
-    popups.forEach((popup) => {
-      if (!popup.classList.contains("popup_hidden")) {
-        closePopup(popup);
-      }
-    });
-  }
 }
 
 // Função para verificar se há cards no grid
@@ -143,7 +84,7 @@ export function noCardsMessage() {
 }
 
 // Função para resetar formulários
-function resetPopup() {
+export function resetPopup() {
   const inputList = Array.from(document.querySelectorAll(".popup__input"));
   inputList.forEach((inputElement) => {
     inputElement.value = "";

@@ -1,27 +1,18 @@
 import Card from "./Card.js";
+import Popup from "./Popup.js";
 import Section from "./Section.js";
 import {
   initialCards,
-  gridContainer,
   editButton,
   addButton,
-  editPopup,
-  addPopup,
   editSaveButton,
   addSaveButton,
-  popups,
-  openPopup,
   saveProfileInfo,
   addNewCard,
-  openPopupWithNameAndAbout,
-  handleCloseButtons,
-  openImagePopup,
-  closePopupOnOverlay,
-  closePopupOnEscKey,
   gridContainerSelector,
 } from "./utils.js";
 
-// Subir cartões dinamicamente para página
+// Instância para cartões dinamicamente para página
 const cardList = new Section(
   {
     items: initialCards,
@@ -37,24 +28,23 @@ const cardList = new Section(
 
 cardList.renderer();
 
-// Ouvintes de evento
+// Instância para abrir edit e add popup
+const editPopupInstance = new Popup(".popup_type_edit");
+editPopupInstance.setEventListeners();
+
+const addPopupInstance = new Popup(".popup_type_add");
+addPopupInstance.setEventListeners();
+
 editButton.addEventListener("click", () => {
-  openPopupWithNameAndAbout();
-  openPopup(editPopup);
+  editPopupInstance.open();
 });
+
+addButton.addEventListener("click", () => {
+  addPopupInstance.open();
+});
+
+// Fim da instância para abrir edit e add popup
 
 editSaveButton.addEventListener("click", saveProfileInfo);
 
-addButton.addEventListener("click", () => {
-  openPopup(addPopup);
-});
-
 addSaveButton.addEventListener("click", addNewCard);
-
-popups.addEventListener("click", handleCloseButtons);
-
-gridContainer.addEventListener("click", openImagePopup);
-
-document.addEventListener("click", closePopupOnOverlay);
-
-document.addEventListener("keydown", closePopupOnEscKey);
