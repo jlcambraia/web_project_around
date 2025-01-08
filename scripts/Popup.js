@@ -8,6 +8,7 @@ export default class Popup {
   open() {
     this._popup.classList.remove("popup_hidden");
     document.addEventListener("keydown", this._handleEscClose);
+    this.setEventListeners();
   }
 
   close() {
@@ -37,5 +38,3 @@ export default class Popup {
     });
   }
 }
-
-class PopupWithForm extends Popup {}
