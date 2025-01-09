@@ -1,8 +1,10 @@
 import Card from "./Card.js";
 import PopupWithForm from "./PopupWithForm.js";
 import FormValidator from "./FormValidator.js";
+import UserInfo from "./UserInfo.js";
 import { editPopupInstance } from "./index.js";
 import { addPopupInstance } from "./index.js";
+import { userInfo } from "./index.js";
 
 // Cards iniciais
 export const initialCards = [
@@ -46,8 +48,8 @@ export const editPopup = document.querySelector(".popup_type_edit");
 export const addPopup = document.querySelector(".popup_type_add");
 const editProfileName = document.querySelector(".profile__user-name");
 const editProfileAbout = document.querySelector(".profile__user-about");
-const editInputName = document.querySelector("#popup__input-name");
-const editInputAbout = document.querySelector("#popup__input-about");
+export const editInputName = document.querySelector("#popup__input-name");
+export const editInputAbout = document.querySelector("#popup__input-about");
 const addInputLink = document.querySelector("#popup__input-link");
 const addInputTitle = document.querySelector("#popup__input-title");
 export const editSaveButton = document.querySelector(
@@ -62,16 +64,19 @@ export const gridContainerSelector = ".grid__card-container";
 
 // Função para abrir edit popup já com o name e about preenchidos
 export function openPopupWithNameAndAbout() {
-  editInputName.value = editProfileName.textContent;
-  editInputAbout.value = editProfileAbout.textContent;
+  const currentUserInfo = userInfo.getUserInfo();
+  editInputName.value = currentUserInfo.name;
+  editInputAbout.value = currentUserInfo.about;
 }
 
-// Salvar edição de name e about
-export function saveProfileInfo(inputValue) {
-  editProfileName.textContent = inputValue.name;
-  editProfileAbout.textContent = inputValue.about;
-  editPopupInstance.close();
-}
+// // Salvar edição de name e about
+// export function saveProfileInfo(userInfo) {
+//   userInfo.setUserInfo({
+//     name: editProfileName.textContent,
+//     about: editProfileAbout.textContent,
+//   });
+//   editPopupInstance.close();
+// }
 
 // Função para adicionar novas imagens ao grid
 export function addNewCard(inputValue) {

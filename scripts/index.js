@@ -3,16 +3,20 @@ import Popup from "./Popup.js";
 import PopupWithImage from "./PopupWithImage.js";
 import PopupWithForm from "./PopupWithForm.js";
 import Section from "./Section.js";
+import UserInfo from "./UserInfo.js";
 import {
   initialCards,
   editButton,
   addButton,
   editSaveButton,
   addSaveButton,
-  saveProfileInfo,
+  editInputName,
+  editInputAbout,
+  // saveProfileInfo,
   addNewCard,
   gridContainerSelector,
   gridContainer,
+  openPopupWithNameAndAbout,
 } from "./utils.js";
 
 // Instância para cartões dinamicamente para página
@@ -33,9 +37,23 @@ cardList.renderer();
 
 // Início da instância para o PopupWithForm
 
+// Instância para card UserInfo
+
+export const userInfo = new UserInfo({
+  nameSelector: ".profile__user-name",
+  aboutSelector: ".profile__user-about",
+});
+
+// Fim da Instância para card UserInfo
+
 export const editPopupInstance = new PopupWithForm(
   ".popup_type_edit",
-  saveProfileInfo
+  (formData) => {
+    userInfo.setUserInfo({
+      name: formData.name,
+      about: formData.about,
+    });
+  }
 );
 export const addPopupInstance = new PopupWithForm(
   ".popup_type_add",
@@ -44,6 +62,7 @@ export const addPopupInstance = new PopupWithForm(
 
 editButton.addEventListener("click", () => {
   editPopupInstance.open();
+  openPopupWithNameAndAbout();
 });
 
 addButton.addEventListener("click", () => {
@@ -69,7 +88,3 @@ gridContainer.addEventListener("click", (evt) => {
 });
 
 // Fim da instância para abrir image popup
-
-// editSaveButton.addEventListener("click", saveProfileInfo);
-
-// addSaveButton.addEventListener("click", addNewCard);
