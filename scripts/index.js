@@ -1,5 +1,4 @@
 import Card from "./Card.js";
-import Popup from "./Popup.js";
 import PopupWithImage from "./PopupWithImage.js";
 import PopupWithForm from "./PopupWithForm.js";
 import Section from "./Section.js";
@@ -8,11 +7,6 @@ import {
   initialCards,
   editButton,
   addButton,
-  editSaveButton,
-  addSaveButton,
-  editInputName,
-  editInputAbout,
-  // saveProfileInfo,
   addNewCard,
   gridContainerSelector,
   gridContainer,

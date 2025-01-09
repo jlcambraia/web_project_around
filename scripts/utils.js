@@ -1,8 +1,5 @@
 import Card from "./Card.js";
-import PopupWithForm from "./PopupWithForm.js";
 import FormValidator from "./FormValidator.js";
-import UserInfo from "./UserInfo.js";
-import { editPopupInstance } from "./index.js";
 import { addPopupInstance } from "./index.js";
 import { userInfo } from "./index.js";
 
@@ -69,17 +66,12 @@ export function openPopupWithNameAndAbout() {
   editInputAbout.value = currentUserInfo.about;
 }
 
-// // Salvar edição de name e about
-// export function saveProfileInfo(userInfo) {
-//   userInfo.setUserInfo({
-//     name: editProfileName.textContent,
-//     about: editProfileAbout.textContent,
-//   });
-//   editPopupInstance.close();
-// }
-
 // Função para adicionar novas imagens ao grid
 export function addNewCard(inputValue) {
+  if (!inputValue.title || !inputValue.link) {
+    return;
+  }
+
   const newCardData = {
     name: inputValue.title,
     link: inputValue.link,
