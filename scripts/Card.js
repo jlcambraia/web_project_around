@@ -1,11 +1,12 @@
 import { noCardsMessage } from "./utils.js";
 
 export default class Card {
-  constructor(data, cardSelector) {
+  constructor(data, cardSelector, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
     this._alt = data.alt;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
   _getTemplate() {
     const cardElement = document
@@ -47,5 +48,13 @@ export default class Card {
     this._element
       .querySelector(".grid__delete-icon")
       .addEventListener("click", () => this._handleDeleteCard());
+
+    this._element.querySelector(".grid__img").addEventListener("click", () => {
+      this._handleCardClick({
+        image: this._link,
+        alt: this._alt,
+        caption: this._name,
+      });
+    });
   }
 }

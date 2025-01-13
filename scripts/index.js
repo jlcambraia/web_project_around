@@ -9,7 +9,6 @@ import {
   addButton,
   addNewCard,
   gridContainerSelector,
-  gridContainer,
   openPopupWithNameAndAbout,
 } from "./utils.js";
 
@@ -18,7 +17,9 @@ const cardList = new Section(
   {
     items: initialCards,
     renderer: (card) => {
-      const newCard = new Card(card, "#grid__card");
+      const newCard = new Card(card, "#grid__card", (popupData) =>
+        imagePopupInstance.open(popupData)
+      );
       const cardElement = newCard.generateCard();
 
       cardList.addItem(cardElement);
@@ -67,18 +68,6 @@ addButton.addEventListener("click", () => {
 
 // Instância para abrir image popup
 
-const imagePopupInstance = new PopupWithImage(".popup_type_image");
-
-gridContainer.addEventListener("click", (evt) => {
-  if (evt.target.classList.contains("grid__img")) {
-    const image = evt.target.src;
-    const alt = evt.target.alt;
-    const caption = evt.target
-      .closest(".grid__card")
-      .querySelector(".grid__card-title").textContent;
-
-    imagePopupInstance.open({ image, alt, caption });
-  }
-});
+export const imagePopupInstance = new PopupWithImage(".popup_type_image");
 
 // Fim da instância para abrir image popup

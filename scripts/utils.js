@@ -1,7 +1,6 @@
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
-import { addPopupInstance } from "./index.js";
-import { userInfo } from "./index.js";
+import { addPopupInstance, userInfo, imagePopupInstance } from "./index.js";
 
 // Cards iniciais
 export const initialCards = [
@@ -37,18 +36,14 @@ export const initialCards = [
   },
 ];
 
-// Variáveis
+// Constantes
 export const gridContainer = document.querySelector(".grid__card-container");
 export const editButton = document.querySelector(".profile__edit-button");
 export const addButton = document.querySelector(".profile__add-button");
 export const editPopup = document.querySelector(".popup_type_edit");
 export const addPopup = document.querySelector(".popup_type_add");
-const editProfileName = document.querySelector(".profile__user-name");
-const editProfileAbout = document.querySelector(".profile__user-about");
 export const editInputName = document.querySelector("#popup__input-name");
 export const editInputAbout = document.querySelector("#popup__input-about");
-const addInputLink = document.querySelector("#popup__input-link");
-const addInputTitle = document.querySelector("#popup__input-title");
 export const editSaveButton = document.querySelector(
   "#popup__save-edit-button"
 );
@@ -56,7 +51,6 @@ export const addSaveButton = document.querySelector("#popup__save-add-button");
 const gridMessage = document.querySelector(".grid__without-cards-text");
 export const popups = document.querySelectorAll(".popups");
 
-// Novos seletores
 export const gridContainerSelector = ".grid__card-container";
 
 // Função para abrir edit popup já com o name e about preenchidos
@@ -78,9 +72,13 @@ export function addNewCard(inputValue) {
     alt: `Imagem de ${inputValue.title}`,
   };
 
-  const newCard = new Card(newCardData, "#grid__card");
+  const newCard = new Card(newCardData, "#grid__card", (popupData) =>
+    imagePopupInstance.open(popupData)
+  );
   gridContainer.prepend(newCard.generateCard());
   addPopupInstance.close();
+
+  noCardsMessage();
 }
 
 // Função para verificar se há cards no grid
