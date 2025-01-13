@@ -1,5 +1,4 @@
 import Card from "./Card.js";
-import FormValidator from "./FormValidator.js";
 import { addPopupInstance, userInfo, imagePopupInstance } from "./index.js";
 
 // Cards iniciais
@@ -117,7 +116,7 @@ export function resetPopup() {
 }
 
 // Configuração para validação
-const configValidation = {
+export const configValidation = {
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__save-button",
@@ -125,6 +124,3 @@ const configValidation = {
   inputErrorClass: "popup__input_type_error",
   errorClassHidden: "popup__input-error_hidden",
 };
-
-const formValidator = new FormValidator(configValidation);
-formValidator.enableValidation();
