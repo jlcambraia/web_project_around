@@ -1,15 +1,15 @@
 import { editPopupInstance } from "./index.js";
 
 export default class UserInfo {
-  constructor({ nameSelector, aboutSelector }) {
-    this._nameElement = document.querySelector(nameSelector);
-    this._aboutElement = document.querySelector(aboutSelector);
+  constructor(userInfo) {
+    this._nameElement = userInfo.name;
+    this._aboutElement = userInfo.about;
   }
 
   getUserInfo() {
     return {
-      name: this._nameElement.textContent,
-      about: this._aboutElement.textContent,
+      name: this._nameElement,
+      about: this._aboutElement,
     };
   }
 
@@ -21,5 +21,10 @@ export default class UserInfo {
       this._aboutElement.textContent = about;
     }
     editPopupInstance.close();
+  }
+
+  renderUserInfo(nameClassSelector, aboutClassSelector) {
+    document.querySelector(nameClassSelector).textContent = this._nameElement;
+    document.querySelector(aboutClassSelector).textContent = this._aboutElement;
   }
 }

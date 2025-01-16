@@ -1,5 +1,5 @@
 import Card from "./Card.js";
-import { addPopupInstance, userInfo, imagePopupInstance } from "./index.js";
+import { addPopupInstance, imagePopupInstance, userInfo } from "./index.js";
 
 // Cards iniciais
 export const initialCards = [
@@ -123,4 +123,10 @@ export const configValidation = {
   inactiveButtonClass: "popup__save-button_disabled",
   inputErrorClass: "popup__input_type_error",
   errorClassHidden: "popup__input-error_hidden",
+};
+
+// Configuração para API
+export const apiConfig = {
+  baseUrl: "https://around-api.pt-br.tripleten-services.com/v1/",
+  token: "a97c4c63-ce40-4267-993b-56ebee3b0bfe",
 };

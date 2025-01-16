@@ -4,7 +4,7 @@ export default class Api {
     this._userToken = apiConfig.token;
   }
   getUserInfo() {
-    return fetch(`${this._apiLinkSelector}users/me`, {
+    return fetch(`${this._apiLinkSelector}users/me/`, {
       headers: {
         authorization: this._userToken,
         "Content-Type": "application/json",
@@ -16,6 +16,7 @@ export default class Api {
       return Promise.reject(`Error: ${res.status}`);
     });
   }
+
   getInitialCards() {
     return fetch(`${this._apiLinkSelector}cards`, {
       headers: {

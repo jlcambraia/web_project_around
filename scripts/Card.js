@@ -1,5 +1,3 @@
-import { noCardsMessage } from "./utils.js";
-
 export default class Card {
   constructor(data, cardSelector, handleCardClick) {
     this._name = data.name;
@@ -25,8 +23,6 @@ export default class Card {
     this._element.querySelector(".grid__card-title").textContent = this._name;
     this._element.querySelector(".grid__img").src = this._link;
     this._element.querySelector(".grid__img").alt = this._alt;
-
-    noCardsMessage();
 
     return this._element;
   }
