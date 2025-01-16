@@ -4,6 +4,7 @@ import PopupWithImage from "./PopupWithImage.js";
 import PopupWithForm from "./PopupWithForm.js";
 import Section from "./Section.js";
 import UserInfo from "./UserInfo.js";
+import Api from "./Api.js";
 import {
   initialCards,
   configValidation,
@@ -71,3 +72,36 @@ editButton.addEventListener("click", () => {
 addButton.addEventListener("click", () => {
   addPopupInstance.open();
 });
+
+// API
+
+const apiConfig = {
+  baseUrl: "https://around-api.pt-br.tripleten-services.com/v1/",
+  token: "a97c4c63-ce40-4267-993b-56ebee3b0bfe",
+};
+
+const api = new Api(apiConfig);
+
+api
+  .getUserInfo()
+  .then((result) => {
+    console.log(result.name);
+  })
+  .catch((err) => {
+    console.error(
+      `Desculpe o incoveniente, estamos enfrentando este erro: ${err}`
+    );
+  });
+
+api
+  .getInitialCards()
+  .then((result) => {
+    result.forEach((info) => {
+      console.log(info);
+    });
+  })
+  .catch((err) => {
+    console.log(
+      `Desculpe o incoveniente, estamos enfrentando este erro: ${err}`
+    );
+  });
