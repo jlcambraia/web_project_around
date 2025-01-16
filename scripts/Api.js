@@ -54,7 +54,25 @@ export default class Api {
     });
   }
 
-  handleAddNewCards() {}
+  saveNewCards(newCardTitle, newCardLink) {
+    return fetch(`${this._apiLinkSelector}cards`, {
+      method: "POST",
+      headers: {
+        authorization: this._userToken,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: newCardTitle,
+        link: newCardLink,
+      }),
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
+    });
+  }
+
   handleToggleLike() {}
   handleDeleteCard() {}
   handleNewProfilePicture() {}

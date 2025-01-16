@@ -1,5 +1,4 @@
-import Card from "./Card.js";
-import { addPopupInstance, imagePopupInstance, userInfo } from "./index.js";
+import { userInfo } from "./index.js";
 
 // Constantes
 export const gridContainer = document.querySelector(".grid__card-container");
@@ -12,7 +11,6 @@ export const editInputAbout = document.querySelector("#popup__input-about");
 export const editSaveButton = document.querySelector(
   "#popup__save-edit-button"
 );
-export const addSaveButton = document.querySelector("#popup__save-add-button");
 const gridMessage = document.querySelector(".grid__without-cards-text");
 export const popups = document.querySelectorAll(".popups");
 
@@ -23,27 +21,6 @@ export function openPopupWithNameAndAbout() {
   const currentUserInfo = userInfo.getUserInfo();
   editInputName.value = currentUserInfo.name;
   editInputAbout.value = currentUserInfo.about;
-}
-
-// Função para adicionar novas imagens ao grid
-export function addNewCard(inputValue) {
-  if (!inputValue.title || !inputValue.link) {
-    return;
-  }
-
-  const newCardData = {
-    name: inputValue.title,
-    link: inputValue.link,
-    alt: `Imagem de ${inputValue.title}`,
-  };
-
-  const newCard = new Card(newCardData, "#grid__card", (popupData) =>
-    imagePopupInstance.open(popupData)
-  );
-  gridContainer.prepend(newCard.generateCard());
-  addPopupInstance.close();
-
-  noCardsMessage();
 }
 
 // Função para verificar se há cards no grid

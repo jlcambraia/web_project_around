@@ -9,13 +9,14 @@ import {
   configValidation,
   editButton,
   addButton,
-  addNewCard,
   gridContainerSelector,
   openPopupWithNameAndAbout,
   apiConfig,
   editSaveButton,
   editInputName,
   editInputAbout,
+  gridContainer,
+  noCardsMessage,
 } from "./utils.js";
 
 // Instância para validação de formulários
@@ -37,7 +38,28 @@ export const editPopupInstance = new PopupWithForm(
 // Instância referente ao Add Popup
 export const addPopupInstance = new PopupWithForm(
   ".popup_type_add",
-  addNewCard
+  (input) => {
+    api
+      .saveNewCards(input.title, input.link)
+      .then((newCardInfo) => {
+        const newCardData = {
+          name: newCardInfo.name,
+          link: newCardInfo.link,
+          alt: `Imagem de ${newCardInfo.name}`,
+        };
+
+        const newCard = new Card(newCardData, "#grid__card", (inputInfo) =>
+          imagePopupInstance.open(inputInfo)
+        );
+        gridContainer.prepend(newCard.generateCard());
+
+        addPopupInstance.close();
+        noCardsMessage();
+      })
+      .catch((err) => {
+        console.error(`Erro ao salvar o novo card: ${err}`);
+      });
+  }
 );
 
 // Instância referente ao Image Popup
@@ -83,7 +105,7 @@ const initialCards = await api
     return result;
   })
   .catch((err) => {
-    console.log(
+    console.error(
       `Desculpe o incoveniente, estamos enfrentando este erro: ${err}`
     );
   });
@@ -106,9 +128,11 @@ const cardList = new Section(
 
 cardList.renderer();
 
-// Constante que salva novos dados no servidor
+// Ouvinte que salva dados alterados pelo usuário no servidor
 editSaveButton.addEventListener("click", () => {
   api.updateUserInfo(editInputName.value, editInputAbout.value).catch((err) => {
     console.error(`Erro ao atualizar informações do usuário: ${err}`);
   });
 });
+
+console.log(await api.getInitialCards());
