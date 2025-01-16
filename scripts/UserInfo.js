@@ -13,18 +13,15 @@ export default class UserInfo {
     };
   }
 
-  setUserInfo({ name, about }) {
+  setUserInfo({ name, about }, nameClassSelector, aboutClassSelector) {
     if (name) {
-      this._nameElement.textContent = name;
+      this._nameElement = name;
+      document.querySelector(nameClassSelector).textContent = name;
     }
     if (about) {
-      this._aboutElement.textContent = about;
+      this._aboutElement = about;
+      document.querySelector(aboutClassSelector).textContent = about;
     }
     editPopupInstance.close();
-  }
-
-  renderUserInfo(nameClassSelector, aboutClassSelector) {
-    document.querySelector(nameClassSelector).textContent = this._nameElement;
-    document.querySelector(aboutClassSelector).textContent = this._aboutElement;
   }
 }

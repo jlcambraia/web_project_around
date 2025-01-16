@@ -13,6 +13,9 @@ import {
   gridContainerSelector,
   openPopupWithNameAndAbout,
   apiConfig,
+  editSaveButton,
+  editInputName,
+  editInputAbout,
 } from "./utils.js";
 
 // Instância para validação de formulários
@@ -23,10 +26,11 @@ formValidator.enableValidation();
 export const editPopupInstance = new PopupWithForm(
   ".popup_type_edit",
   (formData) => {
-    userInfo.setUserInfo({
-      name: formData.name,
-      about: formData.about,
-    });
+    userInfo.setUserInfo(
+      { name: formData.name, about: formData.about },
+      ".profile__user-name",
+      ".profile__user-about"
+    );
   }
 );
 
@@ -53,7 +57,7 @@ addButton.addEventListener("click", () => {
 const api = new Api(apiConfig);
 
 // Constantes que pegam Nome e About via API
-const userImportedInfo = await api
+const userInfoFromApi = await api
   .getUserInfo()
   .then((result) => result)
   .catch((err) => {
@@ -63,10 +67,14 @@ const userImportedInfo = await api
   });
 
 // Instância para coletar informações de nome do usuário e about
-export const userInfo = new UserInfo(userImportedInfo);
+export const userInfo = new UserInfo(userInfoFromApi);
 
 // Renderizar Nome e About do usuário que pegou do API
-userInfo.renderUserInfo(".profile__user-name", ".profile__user-about");
+userInfo.setUserInfo(
+  { name: userInfoFromApi.name, about: userInfoFromApi.about },
+  ".profile__user-name",
+  ".profile__user-about"
+);
 
 // Constantes que pegam cards salvos via API
 const initialCards = await api
@@ -79,8 +87,6 @@ const initialCards = await api
       `Desculpe o incoveniente, estamos enfrentando este erro: ${err}`
     );
   });
-
-console.log(initialCards);
 
 // Instância para renderizar cards iniciais
 const cardList = new Section(
@@ -100,28 +106,9 @@ const cardList = new Section(
 
 cardList.renderer();
 
-// API
-
-api
-  .getUserInfo()
-  .then((result) => {
-    console.log(result.name);
-  })
-  .catch((err) => {
-    console.error(
-      `Desculpe o incoveniente, estamos enfrentando este erro: ${err}`
-    );
+// Constante que salva novos dados no servidor
+editSaveButton.addEventListener("click", () => {
+  api.updateUserInfo(editInputName.value, editInputAbout.value).catch((err) => {
+    console.error(`Erro ao atualizar informações do usuário: ${err}`);
   });
-
-api
-  .getInitialCards()
-  .then((result) => {
-    result.forEach((info) => {
-      console.log(info);
-    });
-  })
-  .catch((err) => {
-    console.log(
-      `Desculpe o incoveniente, estamos enfrentando este erro: ${err}`
-    );
-  });
+});
