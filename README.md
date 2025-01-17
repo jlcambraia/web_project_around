@@ -39,5 +39,3 @@ O website "Around the U.S." é uma plataforma interativa que visa explorar e cel
 2. **Aprimorar a Navegação**: Implementar uma barra de navegação simplificada e intuitiva, com categorias claras (ex.: "Histórias", "Galeria de Imagens", "Participe").
 
 3. **Facilitar Compartilhamento em Redes Sociais**: Incluir botões para compartilhamento direto nas redes sociais, permitindo que os usuários compartilhem suas histórias facilmente.
-
-4. **Aprimorar Profile**: Permitir alteração da foto do perfil.
