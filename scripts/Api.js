@@ -73,7 +73,35 @@ export default class Api {
     });
   }
 
-  handleToggleLike() {}
-  handleDeleteCard() {}
+  changeIsLiked(isLiked, cardId) {
+    return fetch(`${this._apiLinkSelector}cards/${cardId}/likes`, {
+      method: isLiked ? "PUT" : "DELETE",
+      headers: {
+        authorization: this._userToken,
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
+    });
+  }
+
+  deleteCard(cardId) {
+    return fetch(`${this._apiLinkSelector}cards/${cardId}`, {
+      method: "DELETE",
+      headers: {
+        authorization: this._userToken,
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
+    });
+  }
+
   handleNewProfilePicture() {}
 }

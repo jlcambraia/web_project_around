@@ -76,7 +76,7 @@ addButton.addEventListener("click", () => {
 });
 
 // Instância para classe Api
-const api = new Api(apiConfig);
+export const api = new Api(apiConfig);
 
 // Constantes que pegam Nome e About via API
 const userInfoFromApi = await api
