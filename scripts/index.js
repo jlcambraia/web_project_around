@@ -46,11 +46,13 @@ export const addPopupInstance = new PopupWithForm(
           name: newCardInfo.name,
           link: newCardInfo.link,
           alt: `Imagem de ${newCardInfo.name}`,
+          _id: newCardInfo._id,
         };
 
         const newCard = new Card(newCardData, "#grid__card", (inputInfo) =>
           imagePopupInstance.open(inputInfo)
         );
+
         gridContainer.prepend(newCard.generateCard());
 
         addPopupInstance.close();
@@ -136,3 +138,5 @@ editSaveButton.addEventListener("click", () => {
 });
 
 console.log(await api.getInitialCards());
+console.log(await api.getUserInfo());
+console.log(userInfo);

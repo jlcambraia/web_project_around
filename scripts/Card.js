@@ -24,6 +24,8 @@ export default class Card {
   generateCard() {
     this._element = this._getTemplate();
 
+    this._setEventListeners();
+
     this._element.querySelector(".grid__card-title").textContent = this._name;
     this._element.querySelector(".grid__img").src = this._link;
     this._element.querySelector(".grid__img").alt = this._alt;
@@ -32,8 +34,6 @@ export default class Card {
     if (this._isLiked) {
       likeIcon.classList.add("grid__like-icon_active");
     }
-
-    this._setEventListeners();
 
     return this._element;
   }

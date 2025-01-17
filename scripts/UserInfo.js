@@ -4,12 +4,14 @@ export default class UserInfo {
   constructor(userInfo) {
     this._nameElement = userInfo.name;
     this._aboutElement = userInfo.about;
+    this._idElement = userInfo._id;
   }
 
   getUserInfo() {
     return {
       name: this._nameElement,
       about: this._aboutElement,
+      id: this._idElement,
     };
   }
 
