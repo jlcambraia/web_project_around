@@ -116,9 +116,14 @@ export const userInfo = new UserInfo(userInfoFromApi);
 
 // Renderizar Nome e About do usuário que pegou do API
 userInfo.setUserInfo(
-  { name: userInfoFromApi.name, about: userInfoFromApi.about },
+  {
+    name: userInfoFromApi.name,
+    about: userInfoFromApi.about,
+    avatar: userInfoFromApi.avatar,
+  },
   ".profile__user-name",
-  ".profile__user-about"
+  ".profile__user-about",
+  ".profile__picture"
 );
 
 // Constantes que pegam cards salvos via API
@@ -164,6 +169,33 @@ export const popupWithConfirmationInstance = new PopupWithConfirmation(
   ".popup_type_delete",
   ".popup__delete-confirmation-button"
 );
+
+// Instância para lidar com Popup que altera imagem do Perfil
+const changeProfilePicturePopup = new PopupWithForm(
+  ".popup_type_change-profile-picture",
+  (input) => {
+    // Enviar a nova foto de perfil para a API
+    api
+      .updateProfilePicture(input.link)
+      .then(() => {
+        // Atualiza a imagem do perfil no front-end
+        document.querySelector(".profile__picture").src = input.link;
+        changeProfilePicturePopup.close(); // Fecha o pop-up
+      })
+      .catch((err) => {
+        console.error(`Erro ao alterar foto de perfil: ${err}`);
+      });
+  }
+);
+
+document.addEventListener("click", (evt) => {
+  if (
+    evt.target.classList.contains("profile__icon") ||
+    evt.target.classList.contains("profile__picture")
+  ) {
+    changeProfilePicturePopup.open();
+  }
+});
 
 console.log(popupWithConfirmationInstance);
 console.log(await api.getInitialCards());

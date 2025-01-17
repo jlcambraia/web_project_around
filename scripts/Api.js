@@ -103,5 +103,21 @@ export default class Api {
     });
   }
 
-  handleNewProfilePicture() {}
+  updateProfilePicture(avatarUrl) {
+    return fetch(`${this._apiLinkSelector}users/me/avatar`, {
+      method: "PATCH",
+      headers: {
+        authorization: this._userToken,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        avatar: avatarUrl,
+      }),
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
+    });
+  }
 }
