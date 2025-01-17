@@ -2,6 +2,7 @@ import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
 import PopupWithImage from "./PopupWithImage.js";
 import PopupWithForm from "./PopupWithForm.js";
+import PopupWithConfirmation from "./PopupWithConfirmation.js";
 import Section from "./Section.js";
 import UserInfo from "./UserInfo.js";
 import Api from "./Api.js";
@@ -73,7 +74,11 @@ export const addPopupInstance = new PopupWithForm(
 );
 
 // Instância referente ao Image Popup
-export const imagePopupInstance = new PopupWithImage(".popup_type_image");
+export const imagePopupInstance = new PopupWithImage(
+  ".popup_type_image",
+  ".popup__image",
+  ".popup__caption"
+);
 
 // Ouvintes de evento
 editButton.addEventListener("click", () => {
@@ -144,6 +149,14 @@ editSaveButton.addEventListener("click", () => {
     console.error(`Erro ao atualizar informações do usuário: ${err}`);
   });
 });
+
+// Instância para o Popup de Confirmação de exclusão de Card
+
+const popupWithConfirmationInstance = new PopupWithConfirmation(
+  ".popup_type_delete",
+  ".popup__delete-confirmation-button"
+);
+console.log(popupWithConfirmationInstance);
 
 console.log(await api.getInitialCards());
 console.log(await api.getUserInfo());
