@@ -1,5 +1,6 @@
 import { noCardsMessage } from "./utils.js";
 import { api } from "./index.js";
+import { popupWithConfirmationInstance } from "./index.js"; // Importe a instância do popup
 
 export default class Card {
   constructor(data, cardSelector, handleCardClick) {
@@ -11,6 +12,7 @@ export default class Card {
     this._id = data._id;
     this._isLiked = data.isLiked;
   }
+
   _getTemplate() {
     const cardElement = document
       .querySelector(this._cardSelector)
@@ -23,8 +25,6 @@ export default class Card {
   generateCard() {
     this._element = this._getTemplate();
 
-    this._setEventListeners();
-
     this._element.querySelector(".grid__card-title").textContent = this._name;
     this._element.querySelector(".grid__img").src = this._link;
     this._element.querySelector(".grid__img").alt = this._alt;
@@ -33,6 +33,8 @@ export default class Card {
     if (this._isLiked) {
       likeIcon.classList.add("grid__like-icon_active");
     }
+
+    this._setEventListeners();
 
     return this._element;
   }
@@ -53,16 +55,23 @@ export default class Card {
       });
   }
 
-  _handleDeleteCard() {
-    this._element.remove();
-
-    api.deleteCard(this._id).catch((err) => {
-      console.error(
-        `Desculpe o inconveniente, estamos enfrentando este erro: ${err}`
-      );
+  _handleDeleteClick() {
+    popupWithConfirmationInstance.setHandleConfirm(() => {
+      api
+        .deleteCard(this._id)
+        .then(() => {
+          this._element.remove();
+          popupWithConfirmationInstance.close();
+          noCardsMessage();
+        })
+        .catch((err) => {
+          console.error(
+            `Desculpe o inconveniente, estamos enfrentando este erro: ${err}`
+          );
+        });
     });
 
-    noCardsMessage();
+    popupWithConfirmationInstance.open();
   }
 
   _setEventListeners() {
@@ -71,7 +80,7 @@ export default class Card {
       .addEventListener("click", () => this._handleLikeClick());
     this._element
       .querySelector(".grid__delete-icon")
-      .addEventListener("click", () => this._handleDeleteCard());
+      .addEventListener("click", () => this._handleDeleteClick());
 
     this._element.querySelector(".grid__img").addEventListener("click", () => {
       this._handleCardClick({

@@ -37,9 +37,14 @@ export const editPopupInstance = new PopupWithForm(
 );
 
 // Instância referente ao Add Popup
+let isRequestInProgress = false;
+
 export const addPopupInstance = new PopupWithForm(
   ".popup_type_add",
   (input) => {
+    if (isRequestInProgress) return;
+    isRequestInProgress = true;
+
     api
       .saveNewCards(input.title, input.link)
       .then((newCardInfo) => {
@@ -69,6 +74,9 @@ export const addPopupInstance = new PopupWithForm(
       })
       .catch((err) => {
         console.error(`Erro ao salvar o novo card: ${err}`);
+      })
+      .finally(() => {
+        isRequestInProgress = false;
       });
   }
 );
@@ -152,12 +160,12 @@ editSaveButton.addEventListener("click", () => {
 
 // Instância para o Popup de Confirmação de exclusão de Card
 
-const popupWithConfirmationInstance = new PopupWithConfirmation(
+export const popupWithConfirmationInstance = new PopupWithConfirmation(
   ".popup_type_delete",
   ".popup__delete-confirmation-button"
 );
-console.log(popupWithConfirmationInstance);
 
+console.log(popupWithConfirmationInstance);
 console.log(await api.getInitialCards());
 console.log(await api.getUserInfo());
 console.log(userInfo);
