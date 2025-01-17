@@ -27,12 +27,25 @@ formValidator.enableValidation();
 // Instância referente ao Edit Popup
 export const editPopupInstance = new PopupWithForm(
   ".popup_type_edit",
-  (formData) => {
+  (formData, saveButton) => {
+    saveButton.textContent = "Salvando...";
+
     userInfo.setUserInfo(
       { name: formData.name, about: formData.about },
       ".profile__user-name",
       ".profile__user-about"
     );
+
+    api
+      .updateUserInfo(formData.name, formData.about)
+      .then(() => {
+        saveButton.textContent = "Salvar";
+        editPopupInstance.close();
+      })
+      .catch((err) => {
+        saveButton.textContent = "Salvar";
+        console.error(`Erro ao atualizar informações do usuário: ${err}`);
+      });
   }
 );
 
@@ -41,9 +54,10 @@ let isRequestInProgress = false;
 
 export const addPopupInstance = new PopupWithForm(
   ".popup_type_add",
-  (input) => {
+  (input, saveButton) => {
     if (isRequestInProgress) return;
     isRequestInProgress = true;
+    saveButton.textContent = "Salvando...";
 
     api
       .saveNewCards(input.title, input.link)
@@ -76,6 +90,7 @@ export const addPopupInstance = new PopupWithForm(
         console.error(`Erro ao salvar o novo card: ${err}`);
       })
       .finally(() => {
+        saveButton.textContent = "Salvar";
         isRequestInProgress = false;
       });
   }
@@ -173,17 +188,20 @@ export const popupWithConfirmationInstance = new PopupWithConfirmation(
 // Instância para lidar com Popup que altera imagem do Perfil
 const changeProfilePicturePopup = new PopupWithForm(
   ".popup_type_change-profile-picture",
-  (input) => {
-    // Enviar a nova foto de perfil para a API
+  (input, saveButton) => {
+    saveButton.textContent = "Salvando...";
+
     api
       .updateProfilePicture(input.link)
       .then(() => {
-        // Atualiza a imagem do perfil no front-end
         document.querySelector(".profile__picture").src = input.link;
-        changeProfilePicturePopup.close(); // Fecha o pop-up
+        changeProfilePicturePopup.close();
       })
       .catch((err) => {
         console.error(`Erro ao alterar foto de perfil: ${err}`);
+      })
+      .finally(() => {
+        saveButton.textContent = "Salvar";
       });
   }
 );
