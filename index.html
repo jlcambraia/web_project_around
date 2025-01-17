@@ -232,6 +232,47 @@
                 </button>
               </div>
             </div>
+
+            <!-- POPUP PARA ALTERAR PERFIL -->
+            <div class="popup popup_hidden popup_type_change-profile-picture">
+              <div class="popup__card">
+                <h2 class="popup__title">Alterar a foto do perfil</h2>
+                <form
+                  class="popup__form"
+                  name="change-profile-picture-popup"
+                  novalidate
+                >
+                  <div class="popup__input-wrapper">
+                    <input
+                      name="link"
+                      id="popup__input-link"
+                      class="popup__input popup__input_margin-large"
+                      type="url"
+                      placeholder="Link da imagem"
+                      required
+                    />
+                    <span
+                      id="popup__input-link-error"
+                      class="popup__input-error popup__input-error_positioned-top popup__input-error_hidden"
+                    ></span>
+                  </div>
+                  <button
+                    id="popup__change-profile-picture-button"
+                    type="submit"
+                    class="popup__save-button"
+                  >
+                    Salvar
+                  </button>
+                </form>
+                <button class="popup__close-button">
+                  <img
+                    class="popup__close-button-icon"
+                    src="./images/close__icon.svg"
+                    alt="Ícone de Fechar"
+                  />
+                </button>
+              </div>
+            </div>
           </section>
         </main>
         <footer class="footer">
