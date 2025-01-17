@@ -10,7 +10,6 @@ export default class Card {
     this._handleCardClick = handleCardClick;
     this._id = data._id;
     this._isLiked = data.isLiked;
-    this._owner = data.owner;
   }
   _getTemplate() {
     const cardElement = document

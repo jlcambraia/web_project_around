@@ -47,14 +47,22 @@ export const addPopupInstance = new PopupWithForm(
           link: newCardInfo.link,
           alt: `Imagem de ${newCardInfo.name}`,
           _id: newCardInfo._id,
+          owner: newCardInfo.owner,
         };
 
         const newCard = new Card(newCardData, "#grid__card", (inputInfo) =>
           imagePopupInstance.open(inputInfo)
         );
 
-        gridContainer.prepend(newCard.generateCard());
+        if (newCardData.owner !== userInfo._idElement) {
+          const deleteIcon =
+            newCard._element.querySelector(".grid__delete-icon");
+          if (deleteIcon) {
+            deleteIcon.remove();
+          }
+        }
 
+        gridContainer.prepend(newCard.generateCard());
         addPopupInstance.close();
         noCardsMessage();
       })
