@@ -48,6 +48,10 @@
   margin: 0 0 54px;
 }
 
+.popup__title_margin_small {
+  margin-bottom: 38px;
+}
+
 .popup__form {
   display: flex;
   flex-direction: column;
@@ -129,6 +133,20 @@
   cursor: not-allowed;
 }
 
+.popup__delete-confirmation-button {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 18px;
+  border-radius: 2px;
+  width: 100%;
+}
+
+.popup__delete-confirmation-button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  cursor: pointer;
+}
+
 .popup__close-button {
   border: none;
   background-color: transparent;
@@ -160,6 +178,10 @@
   .popup__title {
     font-size: 18px;
     margin: 0 0 76px;
+  }
+
+  .popup__title_margin_small {
+    margin-bottom: 18px;
   }
 
   .popup__input {
