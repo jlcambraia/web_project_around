@@ -13,7 +13,6 @@ export const editSaveButton = document.querySelector(
 );
 const gridMessage = document.querySelector(".grid__without-cards-text");
 export const popups = document.querySelectorAll(".popups");
-
 export const gridContainerSelector = ".grid__card-container";
 
 // Função para abrir edit popup já com o name e about preenchidos
