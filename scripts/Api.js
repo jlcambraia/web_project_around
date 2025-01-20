@@ -35,7 +35,20 @@ export default class Api {
       });
   }
 
+  getUserInfoAndCards() {
+    return Promise.all([this.getUserInfo(), this.getInitialCards()]).then(
+      ([userInfo, cards]) => {
+        return { userInfo, cards };
+      }
+    );
+  }
+
   updateUserInfo(updatedName, updatedAbout) {
+    if (!updatedName || !updatedAbout) {
+      console.log("Nome e/ou Sobre não podem estar vazios");
+      return;
+    }
+
     return fetch(`${this._apiLinkSelector}users/me/`, {
       method: "PATCH",
       headers: {

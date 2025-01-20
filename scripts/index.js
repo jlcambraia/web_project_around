@@ -3,6 +3,7 @@ import FormValidator from "./FormValidator.js";
 import PopupWithImage from "./PopupWithImage.js";
 import PopupWithForm from "./PopupWithForm.js";
 import PopupWithConfirmation from "./PopupWithConfirmation.js";
+import PopupWithError from "./PopupWithError.js";
 import Section from "./Section.js";
 import UserInfo from "./UserInfo.js";
 import Api from "./Api.js";
@@ -24,10 +25,20 @@ import {
 const formValidator = new FormValidator(configValidation);
 formValidator.enableValidation();
 
+// Instância para mostrar mensagem de erro
+const errorPopupInstance = new PopupWithError(
+  ".popup_type_error_message",
+  ".popup__message"
+);
+
 // Instância referente ao Edit Popup
 export const editPopupInstance = new PopupWithForm(
   ".popup_type_edit",
   (formData, saveButton) => {
+    if (!formData.name || !formData.about) {
+      return;
+    }
+
     saveButton.textContent = "Salvando...";
 
     userInfo.setUserInfo(
@@ -44,7 +55,9 @@ export const editPopupInstance = new PopupWithForm(
       })
       .catch((err) => {
         saveButton.textContent = "Salvar";
-        console.error(`Erro ao atualizar informações do usuário: ${err}`);
+        errorPopupInstance.showError(
+          `Erro ao obter informações do usuário: ${err}`
+        );
       });
   }
 );
@@ -87,7 +100,9 @@ export const addPopupInstance = new PopupWithForm(
         noCardsMessage();
       })
       .catch((err) => {
-        console.error(`Erro ao salvar o novo card: ${err}`);
+        errorPopupInstance.showError(
+          `Erro ao obter informações do usuário: ${err}`
+        );
       })
       .finally(() => {
         saveButton.textContent = "Salvar";
@@ -116,13 +131,13 @@ addButton.addEventListener("click", () => {
 // Instância para classe Api
 export const api = new Api(apiConfig);
 
-// Constantes que pegam Nome e About via API
-const userInfoFromApi = await api
-  .getUserInfo()
+// Chamar getUserInfoAndCards para carregar as informações
+const { userInfo: userInfoFromApi, cards: initialCards } = await api
+  .getUserInfoAndCards()
   .then((result) => result)
   .catch((err) => {
-    console.error(
-      `Desculpe o incoveniente, estamos enfrentando este erro: ${err}`
+    errorPopupInstance.showError(
+      `Erro ao obter informações do usuário ou dos cartões: ${err}`
     );
   });
 
@@ -140,18 +155,6 @@ userInfo.setUserInfo(
   ".profile__user-about",
   ".profile__picture"
 );
-
-// Constantes que pegam cards salvos via API
-const initialCards = await api
-  .getInitialCards()
-  .then((result) => {
-    return result;
-  })
-  .catch((err) => {
-    console.error(
-      `Desculpe o incoveniente, estamos enfrentando este erro: ${err}`
-    );
-  });
 
 // Instância para renderizar cards iniciais
 const cardList = new Section(
@@ -174,7 +177,9 @@ cardList.renderer();
 // Ouvinte que salva dados alterados pelo usuário no servidor
 editSaveButton.addEventListener("click", () => {
   api.updateUserInfo(editInputName.value, editInputAbout.value).catch((err) => {
-    console.error(`Erro ao atualizar informações do usuário: ${err}`);
+    errorPopupInstance.showError(
+      `Erro ao obter informações do usuário: ${err}`
+    );
   });
 });
 
@@ -198,7 +203,9 @@ const changeProfilePicturePopup = new PopupWithForm(
         changeProfilePicturePopup.close();
       })
       .catch((err) => {
-        console.error(`Erro ao alterar foto de perfil: ${err}`);
+        errorPopupInstance.showError(
+          `Erro ao obter informações do usuário: ${err}`
+        );
       })
       .finally(() => {
         saveButton.textContent = "Salvar";
@@ -214,8 +221,3 @@ document.addEventListener("click", (evt) => {
     changeProfilePicturePopup.open();
   }
 });
-
-console.log(popupWithConfirmationInstance);
-console.log(await api.getInitialCards());
-console.log(await api.getUserInfo());
-console.log(userInfo);

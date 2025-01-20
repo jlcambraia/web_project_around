@@ -27,6 +27,7 @@
           />
         </header>
         <main class="content">
+          <section class="toast"><div class="toast__container"></div></section>
           <section class="profile">
             <div class="profile__picture-container">
               <img
@@ -272,6 +273,20 @@
                     Salvar
                   </button>
                 </form>
+                <button class="popup__close-button">
+                  <img
+                    class="popup__close-button-icon"
+                    src="./images/close__icon.svg"
+                    alt="Ícone de Fechar"
+                  />
+                </button>
+              </div>
+            </div>
+
+            <!-- POPUP PARA MENSAGEM DE ERRO -->
+            <div class="popup popup_hidden popup_type_error_message">
+              <div class="popup__card">
+                <p class="popup__message"></p>
                 <button class="popup__close-button">
                   <img
                     class="popup__close-button-icon"
