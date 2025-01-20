@@ -55,9 +55,7 @@ export const editPopupInstance = new PopupWithForm(
       })
       .catch((err) => {
         saveButton.textContent = "Salvar";
-        errorPopupInstance.showError(
-          `Erro ao obter informações do usuário: ${err}`
-        );
+        errorPopupInstance.showError(`Erro ao obter informações: ${err}`);
       });
   }
 );
@@ -100,9 +98,7 @@ export const addPopupInstance = new PopupWithForm(
         noCardsMessage();
       })
       .catch((err) => {
-        errorPopupInstance.showError(
-          `Erro ao obter informações do usuário: ${err}`
-        );
+        errorPopupInstance.showError(`Erro ao obter informações: ${err}`);
       })
       .finally(() => {
         saveButton.textContent = "Salvar";
@@ -136,9 +132,7 @@ const { userInfo: userInfoFromApi, cards: initialCards } = await api
   .getUserInfoAndCards()
   .then((result) => result)
   .catch((err) => {
-    errorPopupInstance.showError(
-      `Erro ao obter informações do usuário ou dos cartões: ${err}`
-    );
+    errorPopupInstance.showError(`Erro ao obter informações: ${err}`);
   });
 
 // Instância para coletar informações de nome do usuário e about
@@ -177,9 +171,7 @@ cardList.renderer();
 // Ouvinte que salva dados alterados pelo usuário no servidor
 editSaveButton.addEventListener("click", () => {
   api.updateUserInfo(editInputName.value, editInputAbout.value).catch((err) => {
-    errorPopupInstance.showError(
-      `Erro ao obter informações do usuário: ${err}`
-    );
+    errorPopupInstance.showError(`Erro ao obter informações: ${err}`);
   });
 });
 
@@ -203,9 +195,7 @@ const changeProfilePicturePopup = new PopupWithForm(
         changeProfilePicturePopup.close();
       })
       .catch((err) => {
-        errorPopupInstance.showError(
-          `Erro ao obter informações do usuário: ${err}`
-        );
+        errorPopupInstance.showError(`Erro ao obter informações: ${err}`);
       })
       .finally(() => {
         saveButton.textContent = "Salvar";
@@ -213,6 +203,7 @@ const changeProfilePicturePopup = new PopupWithForm(
   }
 );
 
+// Ouvinte para abrir o o Popup que altera imagem do Perfil
 document.addEventListener("click", (evt) => {
   if (
     evt.target.classList.contains("profile__icon") ||
