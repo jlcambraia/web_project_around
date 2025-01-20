@@ -1,6 +1,6 @@
 import { noCardsMessage } from "./utils.js";
-import { api } from "./index.js";
-import { popupWithConfirmationInstance } from "./index.js"; // Importe a instância do popup
+import { api } from "../pages/index.js";
+import { popupWithConfirmationInstance } from "../pages/index.js";
 
 export default class Card {
   constructor(data, cardSelector, handleCardClick) {

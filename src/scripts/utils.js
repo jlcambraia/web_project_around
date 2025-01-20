@@ -1,4 +1,4 @@
-import { userInfo } from "./index.js";
+import { userInfo } from "../pages/index.js";
 
 // Constantes
 export const gridContainer = document.querySelector(".grid__card-container");

@@ -1,4 +1,4 @@
-import { editPopupInstance } from "./index.js";
+import { editPopupInstance } from "../pages/index.js";
 
 export default class UserInfo {
   constructor(userInfo) {
