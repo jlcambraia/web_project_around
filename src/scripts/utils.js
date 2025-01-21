@@ -69,6 +69,6 @@ export const configValidation = {
 
 // Configuração para API
 export const apiConfig = {
-  baseUrl: "https://around-api.pt-br.tripleten-services.com/v1/",
+  baseUrl: "https://around-api.pt-br.tripleten-services.com/v1",
   token: "a97c4c63-ce40-4267-993b-56ebee3b0bfe",
 };

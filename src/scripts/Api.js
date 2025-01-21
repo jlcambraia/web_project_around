@@ -1,10 +1,10 @@
 export default class Api {
   constructor(apiConfig) {
-    this._apiLinkSelector = apiConfig.baseUrl;
+    this._baseURL = apiConfig.baseUrl;
     this._userToken = apiConfig.token;
   }
   getUserInfo() {
-    return fetch(`${this._apiLinkSelector}users/me/`, {
+    return fetch(`${this._baseURL}/users/me`, {
       headers: {
         authorization: this._userToken,
         "Content-Type": "application/json",
@@ -18,7 +18,7 @@ export default class Api {
   }
 
   getInitialCards() {
-    return fetch(`${this._apiLinkSelector}cards`, {
+    return fetch(`${this._baseURL}/cards`, {
       headers: {
         authorization: this._userToken,
         "Content-Type": "application/json",
@@ -49,7 +49,7 @@ export default class Api {
       return;
     }
 
-    return fetch(`${this._apiLinkSelector}users/me/`, {
+    return fetch(`${this._baseURL}/users/me`, {
       method: "PATCH",
       headers: {
         authorization: this._userToken,
@@ -68,7 +68,7 @@ export default class Api {
   }
 
   saveNewCards(newCardTitle, newCardLink) {
-    return fetch(`${this._apiLinkSelector}cards`, {
+    return fetch(`${this._baseURL}/cards`, {
       method: "POST",
       headers: {
         authorization: this._userToken,
@@ -87,7 +87,7 @@ export default class Api {
   }
 
   changeIsLiked(isLiked, cardId) {
-    return fetch(`${this._apiLinkSelector}cards/${cardId}/likes`, {
+    return fetch(`${this._baseURL}/cards/${cardId}/likes`, {
       method: isLiked ? "PUT" : "DELETE",
       headers: {
         authorization: this._userToken,
@@ -102,7 +102,7 @@ export default class Api {
   }
 
   deleteCard(cardId) {
-    return fetch(`${this._apiLinkSelector}cards/${cardId}`, {
+    return fetch(`${this._baseURL}/cards/${cardId}`, {
       method: "DELETE",
       headers: {
         authorization: this._userToken,
@@ -117,7 +117,7 @@ export default class Api {
   }
 
   updateProfilePicture(avatarUrl) {
-    return fetch(`${this._apiLinkSelector}users/me/avatar`, {
+    return fetch(`${this._baseURL}/users/me/avatar`, {
       method: "PATCH",
       headers: {
         authorization: this._userToken,
