@@ -45,7 +45,6 @@ export default class Api {
 
   updateUserInfo(updatedName, updatedAbout) {
     if (!updatedName || !updatedAbout) {
-      console.log("Nome e/ou Sobre não podem estar vazios");
       return;
     }
 
