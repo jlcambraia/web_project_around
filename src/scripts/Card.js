@@ -14,12 +14,10 @@ export default class Card {
   }
 
   _getTemplate() {
-    const cardElement = document
+    return document
       .querySelector(this._cardSelector)
       .content.querySelector(".grid__card")
       .cloneNode(true);
-
-    return cardElement;
   }
 
   generateCard() {
