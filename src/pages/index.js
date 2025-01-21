@@ -32,37 +32,40 @@ const errorPopupInstance = new PopupWithError(
 );
 
 // Instância referente ao Edit Popup
+let isRequestInProgress = false;
+
 export const editPopupInstance = new PopupWithForm(
   ".popup_type_edit",
   (formData, saveButton) => {
+    if (isRequestInProgress) return;
     if (!formData.name || !formData.about) {
       return;
     }
 
+    isRequestInProgress = true;
     saveButton.textContent = "Salvando...";
-
-    userInfo.setUserInfo(
-      { name: formData.name, about: formData.about },
-      ".profile__user-name",
-      ".profile__user-about"
-    );
 
     api
       .updateUserInfo(formData.name, formData.about)
       .then(() => {
-        saveButton.textContent = "Salvar";
+        userInfo.setUserInfo(
+          { name: formData.name, about: formData.about },
+          ".profile__user-name",
+          ".profile__user-about"
+        );
         editPopupInstance.close();
       })
       .catch((err) => {
-        saveButton.textContent = "Salvar";
         errorPopupInstance.showError(`Erro ao obter informações: ${err}`);
+      })
+      .finally(() => {
+        saveButton.textContent = "Salvar";
+        isRequestInProgress = false;
       });
   }
 );
 
 // Instância referente ao Add Popup
-let isRequestInProgress = false;
-
 export const addPopupInstance = new PopupWithForm(
   ".popup_type_add",
   (input, saveButton) => {
