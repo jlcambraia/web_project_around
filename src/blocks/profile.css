@@ -62,8 +62,8 @@
   border: none;
   background-color: transparent;
   padding: 0;
-  max-width: 25px;
-  max-height: 25px;
+  max-width: 27px;
+  max-height: 26px;
   margin-bottom: 5px;
 }
 
@@ -121,6 +121,8 @@
   .profile__edit-button {
     margin: 0;
     line-height: 0.875;
+    max-height: 19.7px;
+    max-width: 19.5px;
   }
 
   .profile__edit-button-icon {
