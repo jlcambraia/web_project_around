@@ -14,6 +14,7 @@ export const editSaveButton = document.querySelector(
 const gridMessage = document.querySelector(".grid__without-cards-text");
 export const popups = document.querySelectorAll(".popups");
 export const gridContainerSelector = ".grid__card-container";
+export const forms = document.querySelectorAll("form");
 
 // Função para abrir edit popup já com o name e about preenchidos
 export function openPopupWithNameAndAbout() {
@@ -51,7 +52,6 @@ export function resetPopup() {
     document.querySelectorAll(".popup__save-button")
   );
   buttonList.forEach((buttonElement) => {
-    buttonElement.classList.add("popup__save-button");
     buttonElement.classList.add("popup__save-button_disabled");
     buttonElement.setAttribute("disabled", true);
   });
@@ -59,12 +59,10 @@ export function resetPopup() {
 
 // Configuração para validação
 export const configValidation = {
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__save-button",
   inactiveButtonClass: "popup__save-button_disabled",
-  inputErrorClass: "popup__input_type_error",
   errorClassHidden: "popup__input-error_hidden",
+  inputErrorClass: "popup__input_type_error",
+  inputErrorMessageClass: "popup__input-error",
 };
 
 // Configuração para API

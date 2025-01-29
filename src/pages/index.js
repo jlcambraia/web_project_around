@@ -19,11 +19,15 @@ import {
   editInputAbout,
   gridContainer,
   noCardsMessage,
+  forms,
 } from "../scripts/utils.js";
 
 // Instância para validação de formulários
-const formValidator = new FormValidator(configValidation);
-formValidator.enableValidation();
+
+forms.forEach((form) => {
+  const formValidator = new FormValidator(configValidation, form);
+  formValidator.enableValidation();
+});
 
 // Instância para mostrar mensagem de erro
 const errorPopupInstance = new PopupWithError(
