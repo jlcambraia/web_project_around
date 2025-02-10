@@ -1,67 +1,36 @@
-import { userInfo } from "../pages/index.js";
-
-// Constantes
-export const gridContainer = document.querySelector(".grid__card-container");
-export const editButton = document.querySelector(".profile__edit-button");
-export const addButton = document.querySelector(".profile__add-button");
-export const editPopup = document.querySelector(".popup_type_edit");
-export const addPopup = document.querySelector(".popup_type_add");
-export const editInputName = document.querySelector("#popup__input-name");
-export const editInputAbout = document.querySelector("#popup__input-about");
-export const editSaveButton = document.querySelector(
+// Variáveis
+export const popupEditButton = document.querySelector(".profile__edit-button");
+export const popupAddButton = document.querySelector(".profile__add-button");
+export const popupEditSubmitButton = document.querySelector(
   "#popup__save-edit-button"
 );
-const gridMessage = document.querySelector(".grid__without-cards-text");
-export const popups = document.querySelectorAll(".popups");
-export const gridContainerSelector = ".grid__card-container";
+export const popupAddSubmitButton = document.querySelector(
+  "#popup__save-add-button"
+);
+export const popupChangeProfileSubmitButton = document.querySelector(
+  "#popup__change-profile-picture-button"
+);
+export const popupChangeProfileButton = document.querySelector(
+  ".profile__picture-container"
+);
+export const popupDeleteConfirmationButton = document.querySelector(
+  "#popup__delete-confirmation-button"
+);
+export const popupChangeProfileInput = document.querySelector(
+  "#popup__input-change-profile-link"
+);
+export const profilePicture = document.querySelector(".profile__picture");
+export const popupInputName = document.querySelector("#popup__input-name");
+export const popupInputAbout = document.querySelector("#popup__input-about");
+const gridContainer = document.querySelector(".grid__card-container");
+const noCardsMessage = document.querySelector(".grid__without-cards-text");
 export const forms = document.querySelectorAll("form");
 
-// Função para abrir edit popup já com o name e about preenchidos
-export function openPopupWithNameAndAbout() {
-  const currentUserInfo = userInfo.getUserInfo();
-  editInputName.value = currentUserInfo.name;
-  editInputAbout.value = currentUserInfo.about;
-}
-
-// Função para verificar se há cards no grid
-export function noCardsMessage() {
-  if (gridContainer.children.length !== 0) {
-    gridMessage.classList.add("grid__without-cards-text_hidden");
-  } else {
-    gridMessage.classList.remove("grid__without-cards-text_hidden");
-  }
-}
-
-// Função para resetar formulários
-export function resetPopup() {
-  const inputList = Array.from(document.querySelectorAll(".popup__input"));
-  inputList.forEach((inputElement) => {
-    inputElement.value = "";
-    inputElement.classList.remove("popup__input_type_error");
-  });
-
-  const errorList = Array.from(
-    document.querySelectorAll(".popup__input-error")
-  );
-  errorList.forEach((errorElement) => {
-    errorElement.textContent = "";
-    errorElement.classList.add("popup__input-error_hidden");
-  });
-
-  const buttonList = Array.from(
-    document.querySelectorAll(".popup__save-button")
-  );
-  buttonList.forEach((buttonElement) => {
-    buttonElement.classList.add("popup__save-button_disabled");
-    buttonElement.setAttribute("disabled", true);
-  });
-}
-
-// Configuração para validação
-export const configValidation = {
-  inactiveButtonClass: "popup__save-button_disabled",
-  errorClassHidden: "popup__input-error_hidden",
-  inputErrorClass: "popup__input_type_error",
+// Base para validação dos códigos
+export const configValidate = {
+  disabledButtonClass: "popup__save-button_disabled",
+  hiddenInputClass: "popup__input-error_hidden",
+  redBorderInputClass: "popup__input_type_error",
   inputErrorMessageClass: "popup__input-error",
 };
 
@@ -70,3 +39,12 @@ export const apiConfig = {
   baseUrl: "https://around-api.pt-br.tripleten-services.com/v1",
   token: "a97c4c63-ce40-4267-993b-56ebee3b0bfe",
 };
+
+// Esconder mensagem de que não há cartões
+export function toggleNoCardsMessage() {
+  if (gridContainer.children.length === 0) {
+    noCardsMessage.classList.remove("grid__without-cards-text_hidden");
+  } else {
+    noCardsMessage.classList.add("grid__without-cards-text_hidden");
+  }
+}
