@@ -54,7 +54,6 @@ export function checkCardOwner({ cardsInfoFromApi }) {
 
   allCards.forEach((card) => {
     const deleteIcon = card.querySelector(".grid__delete-icon");
-    console.log(deleteIcon);
 
     if (!cardsInfoFromApi.owner === "0afe04124b56e106a47e1aa1") {
       deleteIcon.remove();

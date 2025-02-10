@@ -78,9 +78,6 @@ const { userInfo: userInfoFromApi, cards: cardsInfoFromApi } = await api
     errorPopup.showError(`Erro ao obter informações: ${err}`);
   });
 
-console.log(userInfoFromApi);
-console.log(cardsInfoFromApi);
-
 // Renderizar cards com Section, com dados coletados no servidor
 const renderCards = new Section(
   {
