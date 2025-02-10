@@ -48,3 +48,16 @@ export function toggleNoCardsMessage() {
     noCardsMessage.classList.add("grid__without-cards-text_hidden");
   }
 }
+
+export function checkCardOwner({ cardsInfoFromApi }) {
+  const allCards = document.querySelectorAll(".grid__card");
+
+  allCards.forEach((card) => {
+    const deleteIcon = card.querySelector(".grid__delete-icon");
+    console.log(deleteIcon);
+
+    if (!cardsInfoFromApi.owner === "0afe04124b56e106a47e1aa1") {
+      deleteIcon.remove();
+    }
+  });
+}

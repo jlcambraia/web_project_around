@@ -24,6 +24,7 @@ import {
   configValidate,
   apiConfig,
   toggleNoCardsMessage,
+  checkCardOwner,
 } from "../scripts/utils.js";
 
 // Instância para o Api
@@ -77,6 +78,9 @@ const { userInfo: userInfoFromApi, cards: cardsInfoFromApi } = await api
     errorPopup.showError(`Erro ao obter informações: ${err}`);
   });
 
+console.log(userInfoFromApi);
+console.log(cardsInfoFromApi);
+
 // Renderizar cards com Section, com dados coletados no servidor
 const renderCards = new Section(
   {
@@ -99,6 +103,7 @@ const renderCards = new Section(
 );
 
 renderCards.renderItems();
+checkCardOwner({ cardsInfoFromApi });
 
 // Adicionar novos cards, funcionando com Api e PopupWithForm
 async function addCards(inputData) {
@@ -123,6 +128,7 @@ async function addCards(inputData) {
     renderCards.setItem(newCardElement);
 
     toggleNoCardsMessage();
+    checkCardOwner({ cardsInfoFromApi });
     addPopup.close();
   } catch (err) {
     errorPopup.showError(`Erro ao obter informações: ${err}`);
