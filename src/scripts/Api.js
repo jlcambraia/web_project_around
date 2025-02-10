@@ -1,135 +1,125 @@
 export default class Api {
-  constructor(apiConfig) {
-    this._baseURL = apiConfig.baseUrl;
-    this._userToken = apiConfig.token;
+  constructor({ baseUrl, token }) {
+    this._baseUrl = baseUrl;
+    this._token = token;
   }
+
   getUserInfo() {
-    return fetch(`${this._baseURL}/users/me`, {
+    return fetch(`${this._baseUrl}/users/me`, {
       headers: {
-        authorization: this._userToken,
-        "Content-Type": "application/json",
+        authorization: this._token,
       },
     }).then((res) => {
       if (res.ok) {
         return res.json();
       }
-      return Promise.reject(`Error: ${res.status}`);
+      return Promise.reject(`Algo deu errado: ${res.status}`);
     });
   }
 
-  getInitialCards() {
-    return fetch(`${this._baseURL}/cards`, {
+  getCardsInfo() {
+    return fetch(`${this._baseUrl}/cards`, {
       headers: {
-        authorization: this._userToken,
-        "Content-Type": "application/json",
+        authorization: this._token,
       },
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Error: ${res.status}`);
-      })
-      .then((result) => {
-        return result;
-      });
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Algo deu errado: ${res.status}`);
+    });
   }
 
   getUserInfoAndCards() {
-    return Promise.all([this.getUserInfo(), this.getInitialCards()]).then(
+    return Promise.all([this.getUserInfo(), this.getCardsInfo()]).then(
       ([userInfo, cards]) => {
         return { userInfo, cards };
       }
     );
   }
 
-  updateUserInfo(updatedName, updatedAbout) {
-    if (!updatedName || !updatedAbout) {
-      return;
-    }
-
-    return fetch(`${this._baseURL}/users/me`, {
+  setUserInfo(inputNameValue, inputAboutValue) {
+    return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: {
-        authorization: this._userToken,
+        authorization: this._token,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: updatedName,
-        about: updatedAbout,
+        name: inputNameValue,
+        about: inputAboutValue,
       }),
     }).then((res) => {
       if (res.ok) {
         return res.json();
       }
-      return Promise.reject(`Error: ${res.status}`);
+      return Promise.reject(`Algo deu errado: ${res.status}`);
     });
   }
 
-  saveNewCards(newCardTitle, newCardLink) {
-    return fetch(`${this._baseURL}/cards`, {
+  addNewCard(inputTitleValue, inputLinkValue) {
+    return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: {
-        authorization: this._userToken,
+        authorization: this._token,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: newCardTitle,
-        link: newCardLink,
+        name: inputTitleValue,
+        link: inputLinkValue,
       }),
     }).then((res) => {
       if (res.ok) {
         return res.json();
       }
-      return Promise.reject(`Error: ${res.status}`);
+      return Promise.reject(`Algo deu errado: ${res.status}`);
     });
   }
 
-  changeIsLiked(isLiked, cardId) {
-    return fetch(`${this._baseURL}/cards/${cardId}/likes`, {
-      method: isLiked ? "PUT" : "DELETE",
+  updateLikeState(cardId, isLiked) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      method: isLiked ? "DELETE" : "PUT",
       headers: {
-        authorization: this._userToken,
+        authorization: this._token,
         "Content-Type": "application/json",
       },
     }).then((res) => {
       if (res.ok) {
         return res.json();
       }
-      return Promise.reject(`Error: ${res.status}`);
+      return Promise.reject(`Algo deu errado: ${res.status}`);
     });
   }
 
   deleteCard(cardId) {
-    return fetch(`${this._baseURL}/cards/${cardId}`, {
+    return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: {
-        authorization: this._userToken,
-        "Content-Type": "application/json",
+        authorization: this._token,
       },
     }).then((res) => {
       if (res.ok) {
         return res.json();
       }
-      return Promise.reject(`Error: ${res.status}`);
+      return Promise.reject(`Algo deu errado: ${res.status}`);
     });
   }
 
-  updateProfilePicture(avatarUrl) {
-    return fetch(`${this._baseURL}/users/me/avatar`, {
+  changeProfileImage(avatarLink) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: {
-        authorization: this._userToken,
+        authorization: this._token,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        avatar: avatarUrl,
+        avatar: avatarLink,
       }),
     }).then((res) => {
       if (res.ok) {
         return res.json();
       }
-      return Promise.reject(`Error: ${res.status}`);
+      return Promise.reject(`Algo deu errado: ${res.status}`);
     });
   }
 }
