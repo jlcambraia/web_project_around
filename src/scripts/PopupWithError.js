@@ -1,13 +1,13 @@
 import Popup from "./Popup.js";
 
 export default class PopupWithError extends Popup {
-  constructor(popupSelector, messageSelector) {
+  constructor(popupSelector, errorMessageContainer) {
     super(popupSelector);
-    this._messageElement = this._popup.querySelector(messageSelector);
+    this._errorMessage = this._popup.querySelector(errorMessageContainer);
   }
 
   showError(message) {
-    this._messageElement.textContent = message;
+    this._errorMessage.textContent = message;
     this.open();
 
     setTimeout(() => {
