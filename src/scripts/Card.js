@@ -1,91 +1,86 @@
-import { noCardsMessage } from "./utils.js";
-import { api } from "../pages/index.js";
-import { popupWithConfirmationInstance } from "../pages/index.js";
-
 export default class Card {
-  constructor(data, cardSelector, handleCardClick) {
-    this._name = data.name;
-    this._link = data.link;
-    this._alt = `Imagem de ${data.name}`;
+  constructor(
+    cardData,
+    cardTemplate,
+    cardSelector,
+    handleCardClick,
+    handleOpenDeleteConfirmationPopup,
+    handleRemoveCardFromApi,
+    changeLikeCardStateAtApi
+  ) {
+    this._cardTemplate = cardTemplate;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
-    this._id = data._id;
-    this._isLiked = data.isLiked;
+    this._handleOpenDeleteConfirmationPopup = handleOpenDeleteConfirmationPopup;
+    this._handleRemoveCardFromApi = handleRemoveCardFromApi;
+    this._changeLikeCardStateAtApi = changeLikeCardStateAtApi;
+    this._name = cardData.name;
+    this._link = cardData.link;
+    this._alt = cardData.alt;
+    this._id = cardData._id;
+    this._isLiked = cardData.isLiked;
   }
 
   _getTemplate() {
     return document
-      .querySelector(this._cardSelector)
-      .content.querySelector(".grid__card")
+      .querySelector(this._cardTemplate)
+      .content.querySelector(this._cardSelector)
       .cloneNode(true);
   }
 
-  generateCard() {
+  _setTemplate() {
     this._element = this._getTemplate();
 
-    this._element.querySelector(".grid__card-title").textContent = this._name;
-    this._element.querySelector(".grid__img").src = this._link;
-    this._element.querySelector(".grid__img").alt = this._alt;
-
-    const likeIcon = this._element.querySelector(".grid__like-icon");
-    if (this._isLiked) {
-      likeIcon.classList.add("grid__like-icon_active");
-    }
-
     this._setEventListeners();
+
+    this._element.querySelector(".grid__img").setAttribute("src", this._link);
+    this._element.querySelector(".grid__img").setAttribute("alt", this._alt);
+    this._element.querySelector(".grid__card-title").textContent = this._name;
+
+    this._element.setAttribute("card-id", this._id);
+    this._element.setAttribute("isLiked", this._isLiked);
+
+    if (this._isLiked) {
+      this._element
+        .querySelector(".grid__like-icon")
+        .classList.add("grid__like-icon_active");
+    }
 
     return this._element;
   }
 
-  _handleLikeClick() {
-    const likeIcon = this._element.querySelector(".grid__like-icon");
-    const isLiked = likeIcon.classList.contains("grid__like-icon_active");
-
-    api
-      .changeIsLiked(!isLiked, this._id)
-      .then((result) => {
-        likeIcon.classList.toggle("grid__like-icon_active", result.isLiked);
-      })
-      .catch((err) => {
-        console.error(
-          `Desculpe o inconveniente, estamos enfrentando este erro: ${err}`
-        );
-      });
+  generateCard() {
+    return this._setTemplate();
   }
 
-  _handleDeleteClick() {
-    popupWithConfirmationInstance.setHandleConfirm(() => {
-      api
-        .deleteCard(this._id)
-        .then(() => {
-          this._element.remove();
-          popupWithConfirmationInstance.close();
-          noCardsMessage();
-        })
-        .catch((err) => {
-          console.error(
-            `Desculpe o inconveniente, estamos enfrentando este erro: ${err}`
-          );
-        });
-    });
+  _handleLikeClick() {
+    const likeButton = this._element.querySelector(".grid__like-icon");
+    likeButton.classList.toggle("grid__like-icon_active");
+  }
 
-    popupWithConfirmationInstance.open();
+  _handleRemoveCard() {
+    this._element.remove();
   }
 
   _setEventListeners() {
     this._element
       .querySelector(".grid__like-icon")
-      .addEventListener("click", () => this._handleLikeClick());
-    this._element
-      .querySelector(".grid__delete-icon")
-      .addEventListener("click", () => this._handleDeleteClick());
+      .addEventListener("click", () => {
+        this._changeLikeCardStateAtApi(this._id, this._isLiked);
+        this._handleLikeClick();
+      });
 
     this._element.querySelector(".grid__img").addEventListener("click", () => {
-      this._handleCardClick({
-        image: this._link,
-        alt: this._alt,
-        caption: this._name,
-      });
+      this._handleCardClick(this._name, this._link, this._alt);
     });
+
+    this._element
+      .querySelector(".grid__delete-icon")
+      .addEventListener("click", () => {
+        this._handleOpenDeleteConfirmationPopup(
+          this._id,
+          this._handleRemoveCard.bind(this)
+        );
+      });
   }
 }
