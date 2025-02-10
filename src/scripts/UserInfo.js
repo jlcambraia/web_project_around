@@ -1,40 +1,29 @@
-import { editPopupInstance } from "../pages/index.js";
-
 export default class UserInfo {
-  constructor(userInfo) {
-    this._nameElement = userInfo.name;
-    this._aboutElement = userInfo.about;
-    this._idElement = userInfo._id;
-    this._avatarElement = userInfo.avatar;
+  constructor(userName, userAbout, userAvatar) {
+    this._userName = document.querySelector(userName);
+    this._userAbout = document.querySelector(userAbout);
+    this._userAvatar = document.querySelector(userAvatar);
   }
 
   getUserInfo() {
-    return {
-      name: this._nameElement,
-      about: this._aboutElement,
-      id: this._idElement,
-      avatar: this._avatarElement,
+    const userInfo = {
+      name: this._userName.textContent,
+      about: this._userAbout.textContent,
+      avatar: this._userAvatar.getAttribute("src"),
     };
+
+    return userInfo;
   }
 
-  setUserInfo(
-    { name, about, avatar },
-    nameClassSelector,
-    aboutClassSelector,
-    avatarClassSelector
-  ) {
-    if (name) {
-      this._nameElement = name;
-      document.querySelector(nameClassSelector).textContent = name;
+  setUserInfo(inputName, inputAbout, inputAvatar) {
+    if (inputName) {
+      this._userName.textContent = inputName;
     }
-    if (about) {
-      this._aboutElement = about;
-      document.querySelector(aboutClassSelector).textContent = about;
+    if (inputAbout) {
+      this._userAbout.textContent = inputAbout;
     }
-    if (avatar) {
-      this._avatarElement = avatar;
-      document.querySelector(avatarClassSelector).src = avatar;
+    if (inputAvatar) {
+      this._userAvatar.setAttribute("src", inputAvatar);
     }
-    editPopupInstance.close();
   }
 }
