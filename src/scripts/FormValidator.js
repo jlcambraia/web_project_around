@@ -1,10 +1,10 @@
 export default class FormValidator {
-  constructor(configValidation, formElement) {
+  constructor(configValidate, formElement) {
     this._formElement = formElement;
-    this._inactiveButtonClass = configValidation.inactiveButtonClass;
-    this._errorClassHidden = configValidation.errorClassHidden;
-    this._inputErrorClass = configValidation.inputErrorClass;
-    this._inputErrorMessageClass = configValidation.inputErrorMessageClass;
+    this._disabledButtonClass = configValidate.disabledButtonClass;
+    this._hiddenInputClass = configValidate.hiddenInputClass;
+    this._redBorderInputClass = configValidate.redBorderInputClass;
+    this._inputErrorMessageClass = configValidate.inputErrorMessageClass;
     this._inputs =
       Array.from(this._formElement.querySelectorAll("input")) || [];
     this._button = this._formElement.querySelector("button") || null;
@@ -14,8 +14,8 @@ export default class FormValidator {
     const errorMessage = input.parentElement.querySelector(
       `.${this._inputErrorMessageClass}`
     );
-    input.classList.add(this._inputErrorClass);
-    errorMessage.classList.remove(this._errorClassHidden);
+    input.classList.add(this._redBorderInputClass);
+    errorMessage.classList.remove(this._hiddenInputClass);
     errorMessage.textContent = input.validationMessage;
   }
 
@@ -23,8 +23,8 @@ export default class FormValidator {
     const errorMessage = input.parentElement.querySelector(
       `.${this._inputErrorMessageClass}`
     );
-    input.classList.remove(this._inputErrorClass);
-    errorMessage.classList.add(this._errorClassHidden);
+    input.classList.remove(this._redBorderInputClass);
+    errorMessage.classList.add(this._hiddenInputClass);
     errorMessage.textContent = "";
   }
 
@@ -40,10 +40,10 @@ export default class FormValidator {
     const isInputValid = this._inputs.every((input) => input.validity.valid);
     if (!isInputValid) {
       this._button.setAttribute("disabled", true);
-      this._button.classList.add(this._inactiveButtonClass);
+      this._button.classList.add(this._disabledButtonClass);
     } else {
       this._button.removeAttribute("disabled");
-      this._button.classList.remove(this._inactiveButtonClass);
+      this._button.classList.remove(this._disabledButtonClass);
     }
   }
 
