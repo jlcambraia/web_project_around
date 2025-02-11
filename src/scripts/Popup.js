@@ -33,6 +33,10 @@ export default class Popup {
 
     document.addEventListener("keydown", (evt) => {
       this._handleEscClose(evt);
+      const pressedButton = evt.target.closest("button");
+      if (pressedButton) {
+        pressedButton.blur();
+      }
     });
   }
 }
