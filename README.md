@@ -32,6 +32,8 @@ O website "Around the U.S." é uma plataforma interativa que visa explorar e cel
 
 9. **Responsividade**: O site é totalmente responsivo, adaptando-se a diferentes tamanhos de tela, como smartphones, tablets e desktops, garantindo uma experiência de usuário consistente em todos os dispositivos.
 
+10. **Interação com API**: O projeto se comunica com APIs para solicitar e modificar informações de forma dinâmica. Através de requisições HTTP assíncronas, os dados são recuperados, enviados e atualizados em tempo real, permitindo maior interatividade e integração com serviços externos.
+
 ## Planos de Melhoria:
 
 1. **Melhoria na Identidade Visual**: Incorporar elementos gráficos adicionais que representem as diferentes culturas e regiões dos EUA, como ícones, bandeiras e mapas interativos.
