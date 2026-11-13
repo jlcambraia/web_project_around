@@ -1,43 +1,116 @@
-# Tripleten web_project_around
+# Around the U.S. — Vanilla JavaScript
 
-## Nome do Projeto:
+An interactive photo-sharing website built with **HTML5, CSS3, and vanilla JavaScript**, demonstrating DOM manipulation, form validation, asynchronous API requests, and responsive web development.
 
-Around the U.S.
+**[Live Demo](https://jlcambraia.github.io/web_project_around/)**
 
-## Link para o GitHub Pages:
+## Overview
 
-O site está disponível no GitHub Pages: [Clique aqui para acessar](https://jlcambraia.github.io/web_project_around/)
+Around the U.S. is a photo gallery application where users can manage their profile and interact with photo cards representing different locations.
 
-## Descrição do Projeto:
+This repository represents the vanilla JavaScript iteration of the project, developed as part of the **TripleTen Web Development program**.
 
-O website "Around the U.S." é uma plataforma interativa que visa explorar e celebrar as diversas culturas, paisagens e histórias dos Estados Unidos. O projeto proporciona aos visitantes uma experiência imersiva, permitindo que compartilhem suas experiências, fotos e histórias relacionadas a diferentes regiões do país. O site apresenta uma interface amigável que incentiva a interação e a colaboração entre os usuários, transformando cada visita em uma jornada de descoberta cultural.
+The application focuses on interactive frontend development without using React or another JavaScript framework.
 
-## Tecnologias e Técnicas utilizadas:
+## Features
 
-1. **HTML5**: O documento é estruturado utilizando HTML5, que oferece suporte a recursos modernos e semânticos para uma melhor acessibilidade.
+### User Profile
 
-2. **Metadados**: O uso de metadados garante a responsividade do site, a otimização para motores de busca (SEO) e a descrição precisa do conteúdo da página.
+- Display profile information
+- Edit user name and description
+- Update profile avatar
+- Interactive editing modals
 
-3. **CSS Externo**: A estrutura do site utiliza uma folha de estilo CSS externa, permitindo uma separação clara entre conteúdo e apresentação, o que facilita a manutenção do código.
+### Photo Gallery
 
-4. **Imagens e Favicon**: O projeto inclui imagens que enriquecem a experiência visual do usuário, além de um favicon para identificação no navegador.
+- Display photo cards
+- Add new cards
+- Delete cards with confirmation
+- Like and unlike cards
+- Open images in an enlarged preview modal
 
-5. **Estrutura Semântica**: Utiliza tags semânticas do HTML5 para organizar o conteúdo de maneira lógica, melhorando a acessibilidade e a compreensão da estrutura do site.
+### Forms and Interactions
 
-6. **Boas Práticas de SEO**: O uso de metatags e uma estrutura de cabeçalho adequada ajudam na otimização do site, melhorando sua visibilidade nos motores de busca.
+- Client-side form validation
+- Input error messages
+- Popup opening and closing
+- Interactive buttons
+- Dynamic DOM updates
 
-7. **Interatividade com JavaScript**: O site incorpora JavaScript para funcionalidades interativas, como a manipulação de formulários e a atualização dinâmica de conteúdo, proporcionando uma experiência mais envolvente para o usuário.
+### API Integration
 
-8. **Organização Modular**: O código é organizado de maneira modular, separando o CSS do HTML, seguindo boas práticas de desenvolvimento que facilitam a manutenção e a reutilização.
+- Fetch profile and card data
+- Send updates through asynchronous HTTP requests
+- Create and delete photo cards
+- Update card likes
 
-9. **Responsividade**: O site é totalmente responsivo, adaptando-se a diferentes tamanhos de tela, como smartphones, tablets e desktops, garantindo uma experiência de usuário consistente em todos os dispositivos.
+## Tech Stack
 
-10. **Interação com API**: O projeto se comunica com APIs para solicitar e modificar informações de forma dinâmica. Através de requisições HTTP assíncronas, os dados são recuperados, enviados e atualizados em tempo real, permitindo maior interatividade e integração com serviços externos.
+- HTML5
+- CSS3
+- JavaScript (ES6+)
+- DOM API
+- Fetch API
+- Responsive Web Design
+- GitHub Pages
 
-## Planos de Melhoria:
+## Application Architecture
 
-1. **Melhoria na Identidade Visual**: Incorporar elementos gráficos adicionais que representem as diferentes culturas e regiões dos EUA, como ícones, bandeiras e mapas interativos.
+```text
+HTML Structure
+      |
+CSS Presentation
+      |
+JavaScript Modules
+      |
+DOM Manipulation
+      |
+REST API Integration
+```
 
-2. **Aprimorar a Navegação**: Implementar uma barra de navegação simplificada e intuitiva, com categorias claras (ex.: "Histórias", "Galeria de Imagens", "Participe").
+The application uses JavaScript to manage interface interactions and communicate with an external API.
 
-3. **Facilitar Compartilhamento em Redes Sociais**: Incluir botões para compartilhamento direto nas redes sociais, permitindo que os usuários compartilhem suas histórias facilmente.
+## Getting Started
+
+Requires Git and a modern web browser.
+
+```bash
+git clone https://github.com/jlcambraia/web_project_around.git
+cd web_project_around
+```
+
+Open `index.html` in your browser. For development, a local static server such as VS Code Live Server can also be used.
+
+Some features require connectivity to the external API configured in the project.
+
+## Development Concepts
+
+- **DOM manipulation:** JavaScript dynamically updates profile information, gallery cards, and modal content.
+- **Form validation:** The application validates form inputs and provides feedback.
+- **Asynchronous JavaScript:** HTTP requests retrieve and update application data.
+- **Responsive design:** CSS adapts the interface to different screen sizes.
+
+## Project Evolution
+
+Around the U.S. was developed through multiple iterations:
+
+- **Vanilla JavaScript:** DOM manipulation, forms, and API integration
+- [React Frontend](https://github.com/jlcambraia/web_project_around_react): Component-based architecture and React Hooks
+- [Express Backend](https://github.com/jlcambraia/web_project_around_express): Node.js, Express, and MongoDB
+- [Authentication Version](https://github.com/jlcambraia/web_project_around_auth): User authentication and protected navigation
+
+These repositories demonstrate the progression from frontend fundamentals to a more complete full-stack application.
+
+## Potential Improvements
+
+- Expanded automated testing
+- Improved accessibility
+- Enhanced API error handling
+- Better image loading performance
+- Additional user feedback
+
+## Author
+
+**João Luiz Cambraia**
+
+[GitHub](https://github.com/jlcambraia) · [LinkedIn](https://www.linkedin.com/in/joaoluizcambraia/)
